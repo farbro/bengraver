@@ -1,5 +1,2 @@
-# bengraver
-Design and build of a CNC bottle engraver
-
-test
-test
+# Ben Graver
+An open source bottle engraver.

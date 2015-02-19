@@ -31,7 +31,7 @@ module arm() {
     }
 }
 
-module arm_r() {
+module arm_l() {
   rotate([90, 0, 0]) 
     union() {
   color("gold")
@@ -50,12 +50,12 @@ module arm_r() {
         rotate([0, 0, -arm_bending/2])
           //translate([0, span_rods/2, 0]) 
             rotate([0, 0, 90])
-              //rotate([180, 0, 0])
+              rotate([180, 0, 0])
                 stepper_motor_mount(nema_standard=17, slide_distance=1);
       }
 }
 
-module arm_l() {
+module arm_r() {
   color("gold")
   rotate([90, 0, 0]) 
   linear_extrude(board_thickness, center=true) {

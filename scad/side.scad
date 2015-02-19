@@ -45,15 +45,10 @@ module side_r() {
   difference() {
     side();
     union() {
-      // Stepper holes
-      translate([stepper_x, stepper_z, 0]) rotate([0, 0, stepper_rotation]) nema17_holes(stepper_slide_distance);
       translate([span_bottom - tan(back_tilt_angle)*span_bottle/2, span_bottle/2*cos(back_tilt_angle), 0])
         circle(, r=bottle_axis_diam/2, center=true);
     }
   }
-  translate([stepper_x, stepper_z, -board_thickness/2]) 
-      rotate([0, 0, stepper_rotation])
-      stepper_motor_mount(nema_standard=17);
 }
 
 module side_l() {

@@ -18,21 +18,13 @@ back_tilt_angle=10;
 holes_margin=25; 
 servo_position=[60,100];
 axis_tilt=15; 
-axle_position=[5,40];
+axle_position=[0,0];
 axis_z=40;
-break_position=[40,50];
+break_position=[40,20];
 bottom_extrusion_height=5;
 
 bottle_top_rod_position=[span_bottom-sin(back_tilt_angle)*span_bottle, cos(back_tilt_angle)*span_bottle];
 servo_rotation=atan((bottle_top_rod_position[1]-break_position[1])/(bottle_top_rod_position[0]-break_position[0]))-90;
-
-// Right side
-bottle_axis_diam=15;
-stepper_slide_distance=10;
-stepper_x=30;
-stepper_z=13;
-stepper_rotation=40;
-servo_distance_from_axle=50;
 
 // Left side
 
@@ -45,13 +37,14 @@ top_arm_width=30;
 span_rods=50;
 rod_ext=10;
 table_rod_ext=8;
-arm_bending=20;
+arm_bending=10;
 table_rods_diam=8;
 table_tilt=10;
 
 // Calculations for arms length
 bottle_axle_position=[span_bottom-sin(back_tilt_angle)*span_bottle/2, cos(back_tilt_angle)*span_bottle/2];
 axle_bottle_distance = distance(bottle_axle_position, axle_position);
+echo("Axle-bottle radius:", axle_bottle_distance);
 span_axis =arm_length(span_rods/2, axle_bottle_distance, arm_bending);
 echo( axle_bottle_distance);
 echo( span_axis);
@@ -67,6 +60,14 @@ bottle_bar_width=40;
 bottle_bar_height=span_bottle;
 bottle_bar_pos=bottle_height+bottle_pos+20;
 
+
+// Right side
+bottle_axis_diam=15;
+stepper_slide_distance=3;
+stepper_x=bottle_axle_position[0];
+stepper_z=bottle_axle_position[1];
+stepper_rotation=back_tilt_angle;
+servo_distance_from_axle=50;
 
 // Pulley properties
 shaftDiameter = 8; // the shaft at the center, will be subtracted from the pulley. Better be too small than too wide.

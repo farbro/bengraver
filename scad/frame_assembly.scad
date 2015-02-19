@@ -34,6 +34,3 @@ union() {
   translate([0,-board_thickness/2 - nut_t,span_bottle]) rod_threaded(l=width+board_thickness+nut_t*2);
 }
 
-// Timing pulleys
- translate([bottle_axle_position[0], -board_thickness - 10, bottle_axle_position[1]]) rotate([90, 0, 0]) makeTimingPulley(numTeeth=63);
- translate([stepper_x, -board_thickness - 10, stepper_z]) rotate([90, 0, 0]) makeTimingPulley(numTeeth=8, hubHeight=0);

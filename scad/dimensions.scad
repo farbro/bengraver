@@ -60,8 +60,8 @@ bottle_axle_position=[span_bottom-sin(back_tilt_angle)*span_bottle/2, cos(back_t
 axle_bottle_distance = distance(bottle_axle_position, axle_position);
 echo("Axle-bottle radius:", axle_bottle_distance);
 span_axis =arm_length(span_rods/2, axle_bottle_distance, arm_bending);
-echo( axle_bottle_distance);
-echo( span_axis);
+err = max_distortion(axle_bottle_distance, 0, 20);
+echo("Max distortion:", err);
 
 // Bottle
 bottle_pos=40;

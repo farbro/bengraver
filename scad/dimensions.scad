@@ -29,6 +29,20 @@ servo_rotation=atan((bottle_top_rod_position[1]-break_position[1])/(bottle_top_r
 // Left side
 
 
+// Bottle grip
+bottle_axle_diam=10;
+bottle_axle_pos=[span_bottom-sin(back_tilt_angle)*span_bottle/2, cos(back_tilt_angle)*span_bottle/2];
+
+bottle_grip_bottom_diam=100;
+bottle_grip_bottom_height=4;
+bottle_grip_bottom_cone_height=20;
+
+bottle_grip_top_diam=50;
+bottle_grip_top_height=5;
+bottle_grip_top_cone_height=20;
+bottle_grip_top_diam=50;
+bottle_grip_top_inner_diam=45;
+
 // X table
 arm_width=50;
 bottom_arm_width=30;
@@ -50,7 +64,7 @@ echo( axle_bottle_distance);
 echo( span_axis);
 
 // Bottle
-bottle_pos=30;
+bottle_pos=40;
 bottle_diam=70;
 bottle_height=300;
 
@@ -58,7 +72,7 @@ bottle_height=300;
 // Bottle bar
 bottle_bar_width=40;
 bottle_bar_height=span_bottle;
-bottle_bar_pos=bottle_height+bottle_pos+20;
+bottle_bar_pos=bottle_height+bottle_pos+30;
 
 
 // Right side

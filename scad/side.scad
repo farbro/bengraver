@@ -30,11 +30,7 @@ module side() {
         
         translate([span_bottom/2, -holes_margin]) scale([span_bottom/2-holes_margin/2, bottom_extrusion_height, 1]) circle(1);
 
-        // Servo extrusion
-        translate(servo_position)
-        rotate([0, 0, servo_rotation])
-            square([14,26], center=true);
-            }
+        }
       }
     }
 }

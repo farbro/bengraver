@@ -8,11 +8,11 @@ span_bottle=100;
 bottle_rod_diam=8; 
 front_rod_diam=8; 
 width=450;
-span_bottom= 100; // Bottom rods span
+span_bottom= 80; // Bottom rods span
 span_bottle= 120; // Bottle rods span
 board_thickness=6;
 nut_t=6;
-back_tilt_angle=10;
+back_tilt_angle=30;
 
 // Sides
 holes_margin=25; 
@@ -20,7 +20,7 @@ servo_position=[60,100];
 axis_tilt=15; 
 axle_position=[0,0];
 axis_z=40;
-break_position=[40,20];
+break_position=[0,60];
 bottom_extrusion_height=5;
 
 bottle_top_rod_position=[span_bottom-sin(back_tilt_angle)*span_bottle, cos(back_tilt_angle)*span_bottle];

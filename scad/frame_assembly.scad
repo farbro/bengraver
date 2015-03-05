@@ -18,15 +18,13 @@ translate([0, width, 0]) rotate([90, 0, 0]) side_l();
 
 
 // x table
-translate([axle_position[0], 0, axle_position[1]])
-rotate(table_tilt, [0,1,0]) translate([0,board_thickness+x_table_bar_dist,0]) x_table(width=width-board_thickness*2 - x_table_bar_dist*2);
 
 
 
 // Bottle grip
- translate([bottle_axle_pos[0], board_thickness/2+3, bottle_axle_pos[1]]) rotate([-90, 0, 0]) top_grip();
+ translate([bottle_axle_pos[0], board_thickness/2+3, bottle_axle_pos[1]]) rotate([-90, 0, 0]) bottom_grip();
 
- translate([bottle_axle_pos[0], bottle_bar_pos-board_thickness/2-3, bottle_axle_pos[1]]) rotate([90, 0, 0]) bottom_grip();
+ translate([bottle_axle_pos[0], bottle_bar_pos-board_thickness/2-3, bottle_axle_pos[1]]) rotate([90, 0, 0]) top_grip();
 
 
 
@@ -34,7 +32,7 @@ rotate(table_tilt, [0,1,0]) translate([0,board_thickness+x_table_bar_dist,0]) x_
 translate([span_bottom, 0, 0])
   rotate([0, -back_tilt_angle, 0])
 union() {
-  translate([0,bottle_pos,span_bottle/2]) rotate(-90, [1,0,0]) translate([0, 0, bottle_height]) mirror([0, 0, 1]) bottle();
+  translate([0,bottle_pos,span_bottle/2]) rotate(90, [1,0,0]) translate([0, 0, 0]) mirror([0, 0, 1]) bottle();
   // Bottle bar
   translate([0, bottle_bar_pos, 0]) bar(s=bottle_bar_height, width=bottle_bar_width, t=board_thickness, s_m=bottle_bar_height/2);
 

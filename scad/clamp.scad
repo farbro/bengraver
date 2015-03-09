@@ -73,5 +73,5 @@ module stepper_mount(depth) {
   }
 }
 
-double_clamp(100, 40, 10, 15, 12, 3, 50, 20, 40);
-linear_extrude() translate([0, -50, 0]) text("Ben");
+
+clamp(100, 40, 10, 15, 12, 3, 50, 20, 40);

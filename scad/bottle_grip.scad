@@ -1,7 +1,12 @@
 include <dimensions.scad>;
 include <../MCAD/nuts_and_bolts.scad>;
+use <2dTimingPulleyCutout.scad>;
 
 module bottom_grip() {
+pulley_beltguide(bottle_pulley_teeth, bottle_axle_diam, board_thickness, 0);
+translate([0, 0, 6]) pulley_cogs(bottle_pulley_teeth, bottle_axle_diam, board_thickness , 0);
+
+  translate([0, 0, 6*2]) 
   color("darkslategray")
     difference() {
       union() {
@@ -30,4 +35,4 @@ module top_grip() {
 }
 
 $fn=100;
-top_grip();
+bottom_grip();

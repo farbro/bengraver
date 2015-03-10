@@ -8,11 +8,11 @@ span_bottle=100;
 bottle_rod_diam=8; 
 front_rod_diam=8; 
 width=450;
-span_bottom= 80; // Bottom rods span
+span_bottom= 100; // Bottom rods span
 span_bottle= 120; // Bottle rods span
 board_thickness=6;
 nut_t=6;
-back_tilt_angle=30;
+back_tilt_angle=20;
 
 // Sides
 holes_margin=25; 
@@ -20,7 +20,7 @@ servo_position=[60,100];
 axis_tilt=15; 
 axle_position=[0,0];
 axis_z=40;
-break_position=[0,60];
+//break_position=[0,bottle_axle_pos[1] + span_rods/2];
 bottom_extrusion_height=5;
 
 bottle_top_rod_position=[span_bottom-sin(back_tilt_angle)*span_bottle, cos(back_tilt_angle)*span_bottle];
@@ -42,18 +42,17 @@ bottle_grip_top_height=5;
 bottle_grip_top_cone_height=20;
 bottle_grip_top_diam=50;
 bottle_grip_top_inner_diam=45;
+bottle_pulley_teeth=62;
 
 // X table
-arm_width=50;
-bottom_arm_width=30;
-top_arm_width=30;
-//span_axis=40;
 span_rods=50;
 rod_ext=10;
 table_rod_ext=8;
 arm_bending=10;
 table_rods_diam=8;
 table_tilt=10;
+
+break_position=[0,bottle_axle_pos[1] + span_rods/2];
 
 // Calculations for arms length
 bottle_axle_position=[span_bottom-sin(back_tilt_angle)*span_bottle/2, cos(back_tilt_angle)*span_bottle/2];
@@ -64,9 +63,9 @@ err = max_distortion(axle_bottle_distance, 0, 20);
 echo("Max distortion:", err);
 
 // Bottle
-bottle_pos=40;
-bottle_diam=70;
-bottle_height=300;
+bottle_pos=15;
+bottle_diam=100;
+bottle_height=360;
 
 
 // Bottle bar

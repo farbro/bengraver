@@ -3,28 +3,23 @@ use <formulas.scad>;
 $fn=30;
 
 // Global
-span_bottom=100; 
 span_bottle=100; 
 bottle_rod_diam=8; 
 front_rod_diam=8; 
 width=450;
-span_bottom= 100; // Bottom rods span
+span_bottom= 130; // Bottom rods span
 span_bottle= 120; // Bottle rods span
 board_thickness=6;
 nut_t=6;
-back_tilt_angle=20;
+back_tilt_angle=30;
 
 // Sides
 holes_margin=25; 
-servo_position=[60,100];
-axis_tilt=15; 
 axle_position=[0,0];
 axis_z=40;
-//break_position=[0,bottle_axle_pos[1] + span_rods/2];
+//x_top_rod_position=[0,bottle_axle_pos[1] + span_rods/2];
 bottom_extrusion_height=5;
-
 bottle_top_rod_position=[span_bottom-sin(back_tilt_angle)*span_bottle, cos(back_tilt_angle)*span_bottle];
-servo_rotation=atan((bottle_top_rod_position[1]-break_position[1])/(bottle_top_rod_position[0]-break_position[0]))-90;
 
 // Left side
 
@@ -45,25 +40,29 @@ bottle_grip_top_inner_diam=45;
 bottle_pulley_teeth=62;
 
 // X table
-span_rods=50;
+x_a_distance=80;
+x_table_tilt=-15;
+span_rods=40;
 rod_ext=10;
-table_rod_ext=8;
+table_rod_ext=0;
 arm_bending=10;
 table_rods_diam=8;
 table_tilt=10;
 
-break_position=[0,bottle_axle_pos[1] + span_rods/2];
+// X carriage
+//carriage_length= 24; // single bushing
+carriage_length=55; // double bushings
+carriage_rounding_radius = 10;
+carriage_bushing_hole_width = 12;
+z_rods_length=70;
+z_rods_diam=8;
 
-// Calculations for arms length
-bottle_axle_position=[span_bottom-sin(back_tilt_angle)*span_bottle/2, cos(back_tilt_angle)*span_bottle/2];
-axle_bottle_distance = distance(bottle_axle_position, axle_position);
-echo("Axle-bottle radius:", axle_bottle_distance);
-span_axis =arm_length(span_rods/2, axle_bottle_distance, arm_bending);
-err = max_distortion(axle_bottle_distance, 0, 20);
-echo("Max distortion:", err);
+// Calculations for x table position
+x_top_rod_position=[bottle_axle_pos[0]-x_a_distance*cos(x_table_tilt)+sin(x_table_tilt)*span_rods/2, bottle_axle_pos[1] + x_a_distance*sin(x_table_tilt) + cos(x_table_tilt)*span_rods/2];
+x_btm_rod_position=[bottle_axle_pos[0]-x_a_distance*cos(x_table_tilt)-sin(x_table_tilt)*span_rods/2, bottle_axle_pos[1] + x_a_distance*sin(x_table_tilt) - cos(x_table_tilt)*span_rods/2];
 
 // Bottle
-bottle_pos=15;
+bottle_pos=25;
 bottle_diam=100;
 bottle_height=360;
 

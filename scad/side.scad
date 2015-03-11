@@ -9,13 +9,15 @@ module side() {
 
     difference() {
         // Base plate
+        hull()
         minkowski() {
         circle(holes_margin);
         polygon(points=[
           [0, 0],
           [span_bottom, 0],
           [bottle_top_rod_position[0], bottle_top_rod_position[1]],
-          [break_position[0], break_position[1]],
+          [x_top_rod_position[0], x_top_rod_position[1]],
+          [x_btm_rod_position[0], x_btm_rod_position[1]],
           [axle_position[0], axle_position[1]],
           [0,0]
           ], convexity=1);
@@ -25,6 +27,13 @@ module side() {
         translate(axle_position) circle(front_rod_diam/2);
         translate(bottle_top_rod_position) circle(bottle_rod_diam/2);
         translate([span_bottom, 0, 0]) circle(bottle_rod_diam/2);
+
+        translate(x_top_rod_position) {
+          circle(table_rods_diam/2);
+        }
+        translate(x_btm_rod_position) {
+          circle(table_rods_diam/2);
+        }
 
         // Foot extrusion
         
@@ -41,8 +50,8 @@ module side_r() {
   difference() {
     side();
     union() {
-      translate([span_bottom - tan(back_tilt_angle)*span_bottle/2, span_bottle/2*cos(back_tilt_angle), 0])
-        circle(, r=bottle_axis_diam/2, center=true);
+      translate(bottle_axle_pos)
+        circle(r=bottle_axle_diam/2, center=true);
     }
   }
 }

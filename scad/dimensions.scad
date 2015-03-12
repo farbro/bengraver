@@ -6,26 +6,15 @@ $fn=30;
 span_bottle=100; 
 bottle_rod_diam=8; 
 front_rod_diam=8; 
-width=450;
+width=470;
 span_bottom= 130; // Bottom rods span
 span_bottle= 120; // Bottle rods span
-board_thickness=6;
+board_thickness=5;
 nut_t=6;
-back_tilt_angle=30;
-
-// Sides
-holes_margin=25; 
-axle_position=[0,0];
-axis_z=40;
-//x_top_rod_position=[0,bottle_axle_pos[1] + span_rods/2];
-bottom_extrusion_height=5;
-bottle_top_rod_position=[span_bottom-sin(back_tilt_angle)*span_bottle, cos(back_tilt_angle)*span_bottle];
-
-// Left side
-
+back_tilt_angle=20;
 
 // Bottle grip
-bottle_axle_diam=10;
+bottle_axle_diam=20;
 bottle_axle_pos=[span_bottom-sin(back_tilt_angle)*span_bottle/2, cos(back_tilt_angle)*span_bottle/2];
 
 bottle_grip_bottom_diam=100;
@@ -39,15 +28,31 @@ bottle_grip_top_diam=50;
 bottle_grip_top_inner_diam=45;
 bottle_pulley_teeth=62;
 
+
+// Sides
+holes_margin=25; 
+axle_position=[0,0];
+axis_z=40;
+//x_top_rod_position=[0,bottle_axle_pos[1] + span_rods/2];
+bottom_extrusion_height=5;
+bottle_top_rod_position=[span_bottom-sin(back_tilt_angle)*span_bottle, cos(back_tilt_angle)*span_bottle];
+
+// Right side
+bottle_axis_diam=15;
+stepper_slide_distance=3;
+a_stepper_pos=[span_bottom*0.3, 10];
+stepper_rotation=atan((bottle_axle_pos[1]-a_stepper_pos[1])/(bottle_axle_pos[0]-a_stepper_pos[0]));
+servo_distance_from_axle=50;
+
+// Left side
+
 // X table
 x_a_distance=80;
-x_table_tilt=-15;
-span_rods=40;
+x_table_tilt=15;
+span_rods=70;
 rod_ext=10;
 table_rod_ext=0;
-arm_bending=10;
 table_rods_diam=8;
-table_tilt=10;
 
 // X carriage
 //carriage_length= 24; // single bushing
@@ -56,30 +61,29 @@ carriage_rounding_radius = 10;
 carriage_bushing_hole_width = 12;
 z_rods_length=70;
 z_rods_diam=8;
+z_rods_span=41;
+z_bar_width=20;
+z_pos=45;
+plate_distance = sqrt(pow(15/2, 2) - pow(carriage_bushing_hole_width/2, 2)) + board_thickness/2; // Calculates plate distance (depending on carriage_bushing_hole_width
+nut_hole_width = 2*tan(60)*(15-plate_distance)/2;
 
 // Calculations for x table position
 x_top_rod_position=[bottle_axle_pos[0]-x_a_distance*cos(x_table_tilt)+sin(x_table_tilt)*span_rods/2, bottle_axle_pos[1] + x_a_distance*sin(x_table_tilt) + cos(x_table_tilt)*span_rods/2];
 x_btm_rod_position=[bottle_axle_pos[0]-x_a_distance*cos(x_table_tilt)-sin(x_table_tilt)*span_rods/2, bottle_axle_pos[1] + x_a_distance*sin(x_table_tilt) - cos(x_table_tilt)*span_rods/2];
 
 // Bottle
-bottle_pos=25;
+bottle_pos=30;
 bottle_diam=100;
 bottle_height=360;
-
 
 // Bottle bar
 bottle_bar_width=40;
 bottle_bar_height=span_bottle;
-bottle_bar_pos=bottle_height+bottle_pos+30;
+bottle_bar_pos=bottle_height+bottle_pos+40;
 
+bearing_diam=19;
+bearing_guide_diam=22.1;
 
-// Right side
-bottle_axis_diam=15;
-stepper_slide_distance=3;
-stepper_x=bottle_axle_position[0];
-stepper_z=bottle_axle_position[1];
-stepper_rotation=back_tilt_angle;
-servo_distance_from_axle=50;
 
 // Pulley properties
 shaftDiameter = 8; // the shaft at the center, will be subtracted from the pulley. Better be too small than too wide.

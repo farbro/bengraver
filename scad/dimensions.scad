@@ -49,7 +49,7 @@ servo_distance_from_axle=50;
 // X table
 x_a_distance=80;
 x_table_tilt=15;
-span_rods=70;
+span_rods=75;
 rod_ext=10;
 table_rod_ext=0;
 table_rods_diam=8;
@@ -64,8 +64,11 @@ z_rods_diam=8;
 z_rods_span=41;
 z_bar_width=20;
 z_pos=45;
+z_bushings_diam=15;
+z_bolt_diam=3;
 plate_distance = sqrt(pow(15/2, 2) - pow(carriage_bushing_hole_width/2, 2)) + board_thickness/2; // Calculates plate distance (depending on carriage_bushing_hole_width
-nut_hole_width = 2*tan(60)*(15-plate_distance)/2;
+nut_hole_width = 2*tan(60)*(15-plate_distance-board_thickness/2)/2;
+x_nut_span=carriage_length-5;
 
 // Calculations for x table position
 x_top_rod_position=[bottle_axle_pos[0]-x_a_distance*cos(x_table_tilt)+sin(x_table_tilt)*span_rods/2, bottle_axle_pos[1] + x_a_distance*sin(x_table_tilt) + cos(x_table_tilt)*span_rods/2];
@@ -81,7 +84,7 @@ bottle_bar_width=40;
 bottle_bar_height=span_bottle;
 bottle_bar_pos=bottle_height+bottle_pos+40;
 
-bearing_diam=19;
+bearing_hole_diam=17;
 bearing_guide_diam=22.1;
 
 

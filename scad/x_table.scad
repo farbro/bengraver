@@ -4,15 +4,24 @@ use <../MCAD/motors.scad>;
 use <rod.scad>;
 use <bar.scad>;
 use <solenoid.scad>;
+use <../MCAD/hardware.scad>;
 
 module x_carriage() {
-      module bearing_holes() {
-        translate([carriage_length/2 - 12, span_rods/2, 0]) square([24.2, carriage_bushing_hole_width], center=true);
-        translate([carriage_length/2 - 12, -(span_rods/2), 0]) square([24.2, carriage_bushing_hole_width], center=true);
-        translate([0, z_rods_span/2, 0]) circle(15.2/2);
-        translate([0, - z_rods_span/2, 0]) circle(15.2/2);
-        translate([carriage_length/2 - 5, 0, 0]) square([5.65, nut_hole_width], center=true);
-      }
+  module bearing_holes() {
+    translate([carriage_length/2 - 12, span_rods/2, 0]) square([24.2, carriage_bushing_hole_width], center=true);
+    translate([carriage_length/2 - 12, -(span_rods/2), 0]) square([24.2, carriage_bushing_hole_width], center=true);
+
+    // Screw holes
+    translate([carriage_length*0.4, span_rods/4, 0]) circle(z_bolt_diam/2);
+    translate([carriage_length*0.4, -span_rods/4, 0]) circle(z_bolt_diam/2);
+
+    // Z bushings holes
+    translate([0, z_rods_span/2, 0]) circle(z_bushings_diam/2);
+    translate([0, - z_rods_span/2, 0]) circle(z_bushings_diam/2);
+    
+    // Nut extrusion
+    translate([x_nut_span/2, 0, 0]) square([5.65, nut_hole_width], center=true);
+  }
 
   color("yellow")
   linear_extrude(board_thickness, center=true)
@@ -24,7 +33,6 @@ module x_carriage() {
     
     // Extrude holes for bearings
     union() {
-
       bearing_holes();
       mirror([1, 0, 0]) bearing_holes();
     }
@@ -63,6 +71,10 @@ module x_table() {
       rotate([0, 90, 0]) import("LM8UU-24_Rev3_-_8.stl");
       rotate([90, 90, 0]) translate([0, -z_pos, 0]) rod_smooth(l=z_rods_length, d=z_rods_diam);
     }
+
+    // Nuts
+    translate([0, x_nut_span/2, span_rods/2])  rotate([90, 0]) nut();
+    translate([0, -x_nut_span/2, span_rods/2])  rotate([90, 0]) nut();
   }
 
   // Table rods

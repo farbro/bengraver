@@ -50,9 +50,9 @@ module side_r() {
   difference() {
     side();
     union() {
-      translate(bottle_axle_pos) circle(r=bottle_axle_diam/2, center=true);
+      translate(bottle_axle_pos) circle(r=bearing_hole_diam/2, center=true);
       translate(a_stepper_pos) rotate([0, 0, stepper_rotation]) nema17_holes(stepper_slide_distance);
-      translate([(x_top_rod_position[0] + x_btm_rod_position[0])/2, (x_top_rod_position[1] + x_btm_rod_position[1])/2]) rotate([0, 0, -x_table_tilt+90]) circle(20/2);
+      translate([(x_top_rod_position[0] + x_btm_rod_position[0])/2, (x_top_rod_position[1] + x_btm_rod_position[1])/2]) rotate([0, 0, -x_table_tilt+90]) circle(bearing_hole_diam/2);
     }
   }
   translate([a_stepper_pos[0], a_stepper_pos[1], board_thickness/2]) rotate([0, 180, stepper_rotation]) stepper_motor_mount(17);

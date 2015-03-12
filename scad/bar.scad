@@ -23,7 +23,7 @@ module bar(s=100, width=45, hole_d=8, t=6, m_hole_d=8, s_m=50) {
 }
 
 module bearing_guide() {
-  bar(s=bottle_bar_height, width=bottle_bar_width, hole_d=bottle_rod_diam, t=board_thickness, m_hole_d=bearing_diam, s_m=span_bottle/2);
+  bar(s=bottle_bar_height, width=bottle_bar_width, hole_d=bottle_rod_diam, t=board_thickness, m_hole_d=bearing_guide_diam, s_m=span_bottle/2);
 }
 
 bearing_guide();

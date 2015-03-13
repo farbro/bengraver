@@ -4,8 +4,8 @@ $fn=30;
 
 // Global
 span_bottle=100; 
-bottle_rod_diam=8; 
-front_rod_diam=8; 
+bottle_rod_diam=10; 
+front_rod_diam=10; 
 width=470;
 span_bottom= 130; // Bottom rods span
 span_bottle= 120; // Bottle rods span

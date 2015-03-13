@@ -22,7 +22,7 @@ translate([0, width, 0]) rotate([90, 0, 0]) side_l();
 translate([0, width-board_thickness, 0]) rotate([90, 0, 0]) side_l_bearing_guide();
 
 // Front rod
-translate([0,-board_thickness/2-rod_ext, 0]) rod_threaded(l=width+rod_ext*2+board_thickness);
+translate([0,-board_thickness/2-rod_ext, 0]) rod_threaded(d=front_rod_diam, l=width+rod_ext*2+board_thickness);
 
 // x table
 translate([x_btm_rod_position[0], 0, x_btm_rod_position[1]]) rotate([0, x_table_tilt, 0]) x_table();
@@ -48,6 +48,6 @@ union() {
   translate([0, bottle_bar_pos+board_thickness+1, 0]) bar(s=bottle_bar_height, width=bottle_bar_width, t=board_thickness, s_m=bottle_bar_height/2);
 
   // Rods
-  translate([0,-board_thickness/2 - nut_t,0]) rod_threaded(d=table_rods_diam, l=width+board_thickness+nut_t*2);
-  translate([0,-board_thickness/2 - nut_t,span_bottle]) rod_threaded(d=table_rods_diam, l=width+board_thickness+nut_t*2);
+  translate([0,-board_thickness/2 - nut_t,0]) rod_threaded(d=bottle_rod_diam, l=width+board_thickness+nut_t*2);
+  translate([0,-board_thickness/2 - nut_t,span_bottle]) rod_threaded(d=bottle_rod_diam, l=width+board_thickness+nut_t*2);
 }

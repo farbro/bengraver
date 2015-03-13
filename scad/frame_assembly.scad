@@ -40,7 +40,7 @@ translate([x_btm_rod_position[0], 0, x_btm_rod_position[1]]) rotate([0, x_table_
 translate([span_bottom, 0, 0])
   rotate([0, -back_tilt_angle, 0])
 union() {
-  translate([0,bottle_pos,span_bottle/2]) rotate(90, [1,0,0]) translate([0, 0, 0]) mirror([0, 0, 1]) bottle();
+  //translate([0,bottle_pos,span_bottle/2]) rotate(90, [1,0,0]) translate([0, 0, 0]) mirror([0, 0, 1]) bottle();
   // Bottle bar
   translate([0, bottle_bar_pos, 0]) bearing_guide();
 

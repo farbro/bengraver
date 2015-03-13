@@ -67,6 +67,7 @@ z_pos=45;
 z_bushings_diam=15;
 z_bolt_diam=3;
 plate_distance = sqrt(pow(15/2, 2) - pow(carriage_bushing_hole_width/2, 2)) + board_thickness/2; // Calculates plate distance (depending on carriage_bushing_hole_width
+echo("Plate distance:", plate_distance*2 + board_thickness);
 nut_hole_width = 2*tan(60)*(15-plate_distance-board_thickness/2)/2;
 x_nut_span=carriage_length-5;
 

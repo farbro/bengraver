@@ -26,4 +26,12 @@ module bearing_guide() {
   bar(s=bottle_bar_height, width=bottle_bar_width, hole_d=bottle_rod_diam, t=board_thickness, m_hole_d=bearing_guide_diam, s_m=span_bottle/2);
 }
 
+module bottle_bar() {
+  bar(s=bottle_bar_height, width=bottle_bar_width, t=board_thickness, hole_d=bottle_rod_diam, s_m=bottle_bar_height/2, m_hole_d=bearing_hole_diam);
+}
+
+module z_bar() {
+  bar(s=z_rods_span, width=z_bar_width, hole_d=z_rods_diam, t=board_thickness, m_hole_d=8, s_m=z_rods_span/2);
+}
+
 bearing_guide();

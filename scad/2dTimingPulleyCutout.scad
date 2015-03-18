@@ -1,4 +1,4 @@
-// By Rob Gilson
+include <dimensions.scad>;// By Rob Gilson
 // Based on a script by Erik de Bruijn <reprap@erikdebruijn.nl> 
 // License: GPLv2 or later
 //
@@ -12,14 +12,14 @@
 // Pulley properties
 //shaftDiameter = 4.85; // the shaft at the center, will be subtracted from the pulley. Better be too small than too wide.
 //numTeeth = 11; // this value together with the pitch determines the pulley diameter
-toothType = 3; // 1 = slightly rounded, 2 = oval sharp, 3 = square. For square, set the toothWith a little low. (TODO, not yet implemented)
-
-// Belt properties:
-pitch = 4; // distance between the teeth
-beltThickness = 1.2; // thickness of the part excluding the notch depth!
-beltWidth = 5; // the width/height of the belt. The (vertical) size of the pulley is adapted to this.
-notchDepth = 2.4-1.2; // make it slightly bigger than actual, there's an outward curvature in the inner solid part of the pulley
-toothWidth = 2; // Teeth of the PULLEY, that is.
+//toothType = 3; // 1 = slightly rounded, 2 = oval sharp, 3 = square. For square, set the toothWith a little low. (TODO, not yet implemented)
+//
+//// Belt properties:
+//pitch = 2; // distance between the teeth
+//beltThickness = 1.2; // thickness of the part excluding the notch depth!
+//beltWidth = 5; // the width/height of the belt. The (vertical) size of the pulley is adapted to this.
+//notchDepth = 2.4-1.2; // make it slightly bigger than actual, there's an outward curvature in the inner solid part of the pulley
+//toothWidth = 2; // Teeth of the PULLEY, that is.
 
 //Nut Trap Properties
 //screwWidth = 1.5; //The width of the screw hole (make this slightly larger then the screw)

@@ -16,6 +16,7 @@ module side() {
           [0, 0],
           [span_bottom, 0],
           [bottle_top_rod_position[0], bottle_top_rod_position[1]],
+          //[break_position[0], break_position[1]],
           [x_top_rod_position[0], x_top_rod_position[1]],
           [x_btm_rod_position[0], x_btm_rod_position[1]],
           [axle_position[0], axle_position[1]],
@@ -52,10 +53,17 @@ module side_r() {
     union() {
       translate(bottle_axle_pos) circle(r=bearing_hole_diam/2, center=true);
       translate(a_stepper_pos) rotate([0, 0, stepper_rotation]) nema17_holes(stepper_slide_distance);
-      translate([(x_top_rod_position[0] + x_btm_rod_position[0])/2, (x_top_rod_position[1] + x_btm_rod_position[1])/2]) rotate([0, 0, -x_table_tilt+90]) circle(bearing_hole_diam/2);
+      translate([(x_top_rod_position[0] + x_btm_rod_position[0])/2, (x_top_rod_position[1] + x_btm_rod_position[1])/2]) rotate([0, 0, -x_table_tilt+90])
+      translate([-bearing_extrusion_height/2 + plate_distance - board_thickness/2, 0]) {
+        square([bearing_extrusion_height, bearing_extrusion_length], center=true);
+        square([bearing_axle_extrusion_height, bearing_axle_extrusion_length], center=true);
+        translate([bearing_axle_extrusion_length/2 + 4, bearing_extrusion_height/2 + 3]) square(strap_hole_dim, center=true);
+        translate([bearing_axle_extrusion_length/2 + 4, -(bearing_extrusion_height/2 + 3)]) square(strap_hole_dim, center=true);
+        translate([-(bearing_axle_extrusion_length/2 + 4), bearing_extrusion_height/2 + 3]) square(strap_hole_dim, center=true);
+        translate([-(bearing_axle_extrusion_length/2 + 4), -(bearing_extrusion_height/2 + 3)]) square(strap_hole_dim, center=true);
+      }
     }
   }
-  translate([a_stepper_pos[0], a_stepper_pos[1], board_thickness/2]) rotate([0, 180, stepper_rotation]) stepper_motor_mount(17);
 }
 
 module side_r_bearing_guide() {
@@ -66,7 +74,14 @@ module side_r_bearing_guide() {
     union() {
       translate(bottle_axle_pos) circle(r=bearing_guide_diam/2, center=true);
       translate(a_stepper_pos) rotate([0, 0, stepper_rotation]) nema17_holes(stepper_slide_distance);
-      translate([(x_top_rod_position[0] + x_btm_rod_position[0])/2, (x_top_rod_position[1] + x_btm_rod_position[1])/2]) rotate([0, 0, -x_table_tilt+90]) circle(bearing_guide_diam/2);
+      translate([(x_top_rod_position[0] + x_btm_rod_position[0])/2, (x_top_rod_position[1] + x_btm_rod_position[1])/2]) rotate([0, 0, -x_table_tilt+90]) 
+      translate([-bearing_extrusion_height/2 + plate_distance - board_thickness/2, 0]) {
+        square([bearing_extrusion_height, bearing_extrusion_length], center=true);
+        translate([bearing_axle_extrusion_length/2 + 4, bearing_extrusion_height/2 + 3]) square(strap_hole_dim, center=true);
+        translate([bearing_axle_extrusion_length/2 + 4, -(bearing_extrusion_height/2 + 3)]) square(strap_hole_dim, center=true);
+        translate([-(bearing_axle_extrusion_length/2 + 4), bearing_extrusion_height/2 + 3]) square(strap_hole_dim, center=true);
+        translate([-(bearing_axle_extrusion_length/2 + 4), -(bearing_extrusion_height/2 + 3)]) square(strap_hole_dim, center=true);
+      }
     }
   }
 }
@@ -77,8 +92,15 @@ module side_l_bearing_guide() {
   difference() {
     side();
     union() {
-      translate(bottle_axle_pos) circle(r=bottle_axle_diam/2, center=true);
-      translate([(x_top_rod_position[0] + x_btm_rod_position[0])/2, (x_top_rod_position[1] + x_btm_rod_position[1])/2]) rotate([0, 0, -x_table_tilt+90]) nema17_holes(stepper_slide_distance);
+      translate(bottle_axle_pos) circle(r=bottle_axle_diam, center=true);
+      translate([(x_top_rod_position[0] + x_btm_rod_position[0])/2, (x_top_rod_position[1] + x_btm_rod_position[1])/2]) rotate([0, 0, -x_table_tilt+90]) 
+      translate([-bearing_extrusion_height/2 + plate_distance - board_thickness/2, 0]) {
+        square([bearing_extrusion_height, bearing_extrusion_length], center=true);
+        translate([bearing_axle_extrusion_length/2 + 4, bearing_extrusion_height/2 + 3]) square(strap_hole_dim, center=true);
+        translate([bearing_axle_extrusion_length/2 + 4, -(bearing_extrusion_height/2 + 3)]) square(strap_hole_dim, center=true);
+        translate([-(bearing_axle_extrusion_length/2 + 4), bearing_extrusion_height/2 + 3]) square(strap_hole_dim, center=true);
+        translate([-(bearing_axle_extrusion_length/2 + 4), -(bearing_extrusion_height/2 + 3)]) square(strap_hole_dim, center=true);
+      }
     }
   }
 }
@@ -89,11 +111,18 @@ module side_l() {
   difference() {
     side();
     union() {
-      translate(bottle_axle_pos) circle(r=bottle_axle_diam/2, center=true);
-      translate([(x_top_rod_position[0] + x_btm_rod_position[0])/2, (x_top_rod_position[1] + x_btm_rod_position[1])/2]) rotate([0, 0, -x_table_tilt+90]) nema17_holes(stepper_slide_distance);
+      translate(bottle_axle_pos) circle(r=bottle_axle_diam, center=true);
+      translate([(x_top_rod_position[0] + x_btm_rod_position[0])/2, (x_top_rod_position[1] + x_btm_rod_position[1])/2]) rotate([0, 0, -x_table_tilt+90])
+      translate([-bearing_extrusion_height/2 + plate_distance - board_thickness/2, 0]) {
+        square([bearing_extrusion_height, bearing_extrusion_length], center=true);
+        square([bearing_axle_extrusion_height, bearing_axle_extrusion_length], center=true);
+        translate([bearing_axle_extrusion_length/2 + 4, bearing_extrusion_height/2 + 3]) square(strap_hole_dim, center=true);
+        translate([bearing_axle_extrusion_length/2 + 4, -(bearing_extrusion_height/2 + 3)]) square(strap_hole_dim, center=true);
+        translate([-(bearing_axle_extrusion_length/2 + 4), bearing_extrusion_height/2 + 3]) square(strap_hole_dim, center=true);
+        translate([-(bearing_axle_extrusion_length/2 + 4), -(bearing_extrusion_height/2 + 3)]) square(strap_hole_dim, center=true);
+      }
     }
   }
-  translate([(x_top_rod_position[0] + x_btm_rod_position[0])/2, (x_top_rod_position[1] + x_btm_rod_position[1])/2]) rotate([0, 0, -x_table_tilt]) stepper_motor_mount(17);
 }
 
 side_l();

@@ -9,12 +9,12 @@ use <bottle_grip2.scad>;
 minkowski() {
   circle(cut_diam/2);
   projection()
-  side_r();
-  //side_r_bearing_guide();
-  //side_r_rod_stop();
-  //side_l();
-  //side_l_bearing_guide();
-  //side_l_rod_stop();
+  //side_ri();
+  side_rm();
+  //side_ro();
+  //side_li();
+  //side_lm();
+  //side_lo();
   //mount_plate();
   //rotate([90, 0, 90]) bearing_guide();
   //rotate([90, 0, 90]) bottle_bar();

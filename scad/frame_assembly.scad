@@ -14,14 +14,16 @@ x_table_bar_dist = 3;
 
 // Sides
 rotate([90,0,0]) {
-  side_r();
-  translate([0, 0, -board_thickness]) side_r_bearing_guide();
+  translate([0, 0, board_thickness]) side_ri();
+  side_rm();
+  translate([0, 0, -board_thickness]) side_ro();
   translate([bottle_axle_pos[0], bottle_axle_pos[1], board_thickness/2 + 7/2]) bearing();
   translate([bottle_axle_pos[0], bottle_axle_pos[1], -(board_thickness/2 + 7/2)]) bearing();
   translate([a_stepper_pos[0], a_stepper_pos[1], board_thickness/2]) rotate([0, 180, stepper_rotation]) stepper_motor_mount(17);
 }
-translate([0, width, 0]) rotate([90, 0, 0]) side_l();
-translate([0, width-board_thickness, 0]) rotate([90, 0, 0]) side_l_bearing_guide();
+translate([0, width, 0]) rotate([90, 0, 0]) side_lm();
+translate([0, width-board_thickness, 0]) rotate([90, 0, 0]) side_li();
+translate([0, width+board_thickness, 0]) rotate([90, 0, 0]) side_lo();
 
 // Front rod
 translate([0,-board_thickness/2-rod_ext, 0]) rod_threaded(d=front_rod_diam, l=width+rod_ext*2+board_thickness);
@@ -31,11 +33,7 @@ translate([x_btm_rod_position[0], 0, x_btm_rod_position[1]]) rotate([0, 90 + x_t
   x_table();
   translate([- plate_distance + board_thickness/2, -5,  x_rods_span/2]) rotate([0, 90, 0]) {
     bearing();
-    rotate([90, 0, 0]) translate([0, -(bearing_axle_extrusion_height-bearing_extrusion_height)/2, 0]) rod_smooth(d=8, l=bearing_axle_extrusion_height);
-  }
-  translate([- plate_distance + board_thickness/2, 5 + width,  x_rods_span/2]) rotate([0, 90, 0]) {
-    bearing();
-    rotate([90, 0, 0]) translate([0, -(bearing_axle_extrusion_height-bearing_extrusion_height)/2, 0]) rod_smooth(d=8, l=bearing_axle_extrusion_height);
+    rotate([90, 0, 0]) translate([0, -(bearing_axle_length-bearing_extrusion_height)/2, 0]) rod_smooth(d=8, l=bearing_axle_length);
   }
 }
 

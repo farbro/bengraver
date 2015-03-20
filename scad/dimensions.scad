@@ -1,6 +1,6 @@
 use <formulas.scad>;
 
-$fn=100;
+$fn=20;
 
 // Global
 cut_diam=0.2;
@@ -44,8 +44,8 @@ break_position=[70, 50];
 axis_z=40;
 bearing_extrusion_height=7.2;
 bearing_extrusion_length=26;
-bearing_axle_extrusion_height=20;
-bearing_axle_extrusion_length=7.5;
+bearing_axle_length=20;
+bearing_id=8;
 
 //x_top_rod_position=[0,bottle_axle_pos[1] + x_rods_span/2];
 bottom_extrusion_height=5;

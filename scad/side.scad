@@ -21,6 +21,19 @@ module x_rods_holes() {
     translate(x_btm_rod_position) { circle(table_rods_diam/2); }
 }
 
+module endstop_hole(inner=true) {
+  translate([(x_top_rod_position[0] + x_btm_rod_position[0])/2, (x_top_rod_position[1] + x_btm_rod_position[1])/2]) rotate([0, 0, -x_table_tilt+90])
+  translate([plate_distance, - carriage_height/2])  
+  rotate([180, 0, 180]) {
+      projection(cut=!inner) endstop();
+  }
+
+}
+
+module cable_channel(points) {
+
+}
+
 module a_stepper_holes(outline=false) {
   
   translate(a_stepper_pos) rotate([0, 0, stepper_rotation]) 
@@ -76,6 +89,7 @@ module side_rm() {
       belt_guide(inner=true);
       x_rod_holes();
       a_stepper_holes(outline=false);
+      endstop_hole(inner=true, show=false);
     }
   }
 }
@@ -90,6 +104,7 @@ module side_ri() {
       a_stepper_holes(outline=false);
       x_rods_holes();
       belt_guide(inner=false);
+      endstop_hole(inner=false, show=true);
     }
   }
 }

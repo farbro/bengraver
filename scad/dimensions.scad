@@ -61,6 +61,7 @@ servo_distance_from_axle=50;
 // Left side
 
 // X table
+x_carriage_pos=width/5;
 x_a_distance=85;
 x_table_tilt=0;
 x_rods_span=50;

@@ -20,9 +20,8 @@ module nema17_holes(slide) {
   circle(r=shaft_d/2, center=true);
 }
 
-module endstop() {
+module endstop(pcb_base=true) {
   // End stop from Sparkfun
-
   outer=18.6;
   inner=9.9;
   height=15.04;
@@ -32,7 +31,8 @@ module endstop() {
   pcb_length=15.11;
   pcb_thickness=1.56;
 
-  translate([-outer/2, 0, -depth/2]) {
+  rotate([90, 0, 0]) 
+  translate([-outer/2, -(height-inner_height), -depth/2]) {
     color("gray")
     linear_extrude(depth)
     difference() {

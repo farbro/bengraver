@@ -52,7 +52,7 @@ module x_carriage() {
 }
 
 module x_table() {
-  translate([0, x_table_width/3, 0]) {
+  translate([0, x_carriage_pos, 0]) {
     // Carriage plates
 
     translate([-plate_distance, 0, x_rods_span/2]) rotate([90, 0, 90]) x_carriage();

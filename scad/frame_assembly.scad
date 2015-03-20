@@ -42,7 +42,7 @@ translate([x_btm_rod_position[0], 0, x_btm_rod_position[1]]) rotate([0, 90 + x_t
 
  translate([bottle_axle_pos[0], bottle_bar_pos-board_thickness/2-3, bottle_axle_pos[1]]) rotate([90, 0, 0]) top_grip();
  translate([bottle_axle_pos[0], bottle_bar_pos-7/2+board_thickness/2, bottle_axle_pos[1]]) rotate([90, 0, 0]) bearing();
- translate([bottle_axle_pos[0], bottle_bar_pos+7+board_thickness, bottle_axle_pos[1]]) rotate([90, 0, 0]) bearing();
+ translate([bottle_axle_pos[0], bottle_bar_pos+7+board_thickness*2, bottle_axle_pos[1]]) rotate([90, 0, 0]) bearing();
 
 
 
@@ -55,7 +55,8 @@ union() {
   translate([0, bottle_bar_pos, 0]) bearing_guide();
 
   // Bearing guide
-  translate([0, bottle_bar_pos+board_thickness+1, 0]) bar(s=bottle_bar_height, width=bottle_bar_width, t=board_thickness, s_m=bottle_bar_height/2);
+  translate([0, bottle_bar_pos+board_thickness, 0]) bottle_bar();
+  translate([0, bottle_bar_pos+board_thickness*2, 0]) bearing_guide();
 
   // Rods
   translate([0,-board_thickness/2 - nut_t,0]) rod_threaded(d=bottle_rod_diam, l=width+board_thickness+nut_t*2);

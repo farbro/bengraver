@@ -14,9 +14,9 @@ x_table_bar_dist = 3;
 
 // Sides
 rotate([90,0,0]) {
-  translate([0, 0, board_thickness]) side_ri();
+  translate([0, 0, board_thickness]) side_ro();
   side_rm();
-  translate([0, 0, -board_thickness]) side_ro();
+  translate([0, 0, -board_thickness]) side_ri();
   translate([bottle_axle_pos[0], bottle_axle_pos[1], board_thickness/2 + 7/2]) bearing();
   translate([bottle_axle_pos[0], bottle_axle_pos[1], -(board_thickness/2 + 7/2)]) bearing();
   translate([a_stepper_pos[0], a_stepper_pos[1], board_thickness/2]) rotate([0, 180, stepper_rotation]) stepper_motor_mount(17);

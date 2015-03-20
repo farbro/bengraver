@@ -24,12 +24,14 @@ module x_rods_holes() {
 module a_stepper_holes(outline=false) {
   
   translate(a_stepper_pos) rotate([0, 0, stepper_rotation]) 
-    if (outline) nema17_holes(stepper_slide_distance);
+    if (!outline) nema17_holes(stepper_slide_distance);
     else intersection() {
       square([42.5, 42.5], center=true);
       rotate([0, 0, 45]) square([54, 54], center=true);
     }
 }
+
+module 
 
 module side() {
   union() {
@@ -87,7 +89,7 @@ module side_ri() {
     side();
     union() {
       translate(bottle_axle_pos) circle(r=bearing_guide_diam/2, center=true);
-      a_stepper_holes();
+      a_stepper_holes(outline=false);
       x_rods_holes();
       belt_guide(inner=false);
     }

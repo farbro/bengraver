@@ -31,7 +31,7 @@ module x_carriage() {
     translate([z_rods_span/2, z_bushings_pos, 0]) rotate([0, 0, 90]) bushings_extrusion(bushings_hole_length, z_bushings_hole_width);
   }
 
-  color("yellow")
+  color("white")
   linear_extrude(board_thickness, center=true)
   difference() {
     minkowski() {

@@ -31,8 +31,6 @@ module a_stepper_holes(outline=false) {
     }
 }
 
-module 
-
 module side() {
   union() {
   top_x_position = span_bottom -sin(back_tilt_angle)*span_bottle;
@@ -68,7 +66,7 @@ module side() {
 }
 
 module side_rm() {
-  color("yellow")
+  color("white")
   linear_extrude(board_thickness, center=true)
   difference() {
     side();
@@ -83,7 +81,7 @@ module side_rm() {
 }
 
 module side_ri() {
-  color("yellow")
+  color("white")
   linear_extrude(board_thickness, center=true)
   difference() {
     side();
@@ -97,7 +95,7 @@ module side_ri() {
 }
 
 module side_ro() {
-  color("yellow")
+  color("white")
   linear_extrude(board_thickness, center=true)
   difference() {
     side();
@@ -110,7 +108,7 @@ module side_ro() {
 }
 
 module side_li() {
-  color("yellow")
+  color("white")
   linear_extrude(board_thickness, center=true)
   difference() {
     side();
@@ -121,7 +119,7 @@ module side_li() {
 }
 
 module side_lo() {
-  color("yellow")
+  color("white")
   linear_extrude(board_thickness, center=true)
   difference() {
     side();
@@ -129,7 +127,7 @@ module side_lo() {
 }
 
 module side_lm() {
-  color("yellow")
+  color("white")
   linear_extrude(board_thickness, center=true)
   difference() {
     side();

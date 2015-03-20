@@ -31,7 +31,12 @@ module endstop_hole() {
 }
 
 module cable_channel(points) {
-
+  for (i=[1:len(points)-1]) {
+    hull() {
+      translate([points[i][0], points[i][1]]) circle(cable_diam/2);
+      translate([points[i-1][0], points[i-1][1]]) circle(cable_diam/2);
+    }
+  }
 }
 
 module x_stepper_strap_holes() {
@@ -98,10 +103,13 @@ module side_rm() {
       translate(bottle_axle_pos) circle(r=bearing_hole_diam/2, center=true);
       translate(a_stepper_pos) rotate([0, 0, stepper_rotation]) nema17_holes(stepper_slide_distance);
       belt_guide(inner=true);
-      x_rod_holes();
+      x_rods_holes();
       a_stepper_holes(outline=false);
       endstop_hole(inner=true, show=false);
       projection(cut=false) endstop_hole();
+      cable_channel(points=[[front_rod_diam, 0], [a_stepper_pos[0] - 23, a_stepper_pos[1]], [75, 45]]);
+      cable_channel(points=[[75, 45], x_top_rod_position]);
+      cable_channel(points=[[front_rod_diam, 0], x_btm_rod_position]);
     }
   }
 }

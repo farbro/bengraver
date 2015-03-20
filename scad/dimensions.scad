@@ -15,6 +15,8 @@ board_thickness=5.65;
 nut_t=6;
 back_tilt_angle=20;
 
+cable_diam=1.5;
+
 bushings_diam=15;
 bushings_length=24;
 bushings_hole_length=24.2;
@@ -56,7 +58,7 @@ bottle_top_rod_position=[span_bottom-sin(back_tilt_angle)*span_bottle, cos(back_
 bottle_axis_diam=15;
 stepper_slide_distance=0;
 a_stepper_pos=[span_bottom*0.4, 10];
-stepper_rotation=atan((bottle_axle_pos[1]-a_stepper_pos[1])/(bottle_axle_pos[0]-a_stepper_pos[0]));
+stepper_rotation=0; //atan((bottle_axle_pos[1]-a_stepper_pos[1])/(bottle_axle_pos[0]-a_stepper_pos[0]));
 servo_distance_from_axle=50;
 
 // Left side
@@ -111,7 +113,7 @@ bottle_height=360;
 // Bottle bar
 bottle_bar_width=40;
 bottle_bar_height=span_bottle;
-bottle_bar_pos=bottle_height+bottle_pos+40;
+bottle_bar_pos=bottle_height+bottle_pos+30;
 
 bearing_hole_diam=13;
 bearing_guide_diam=22;

@@ -14,7 +14,7 @@ x_table_bar_dist = 3;
 
 // Sides
 rotate([90,0,0]) {
-  side_ro();
+  //side_ro();
   translate([0, 0, -board_thickness]) {
     side_rm();
     translate([0, 0, -board_thickness/2]) endstop_hole();
@@ -32,13 +32,6 @@ translate([0, width-2*board_thickness, 0]) rotate([90, 0, 0]) side_li();
 translate([0,-board_thickness/2-rod_ext, 0]) rod_threaded(d=front_rod_diam, l=width+rod_ext*2+board_thickness);
 
 // x table
-translate([x_btm_rod_position[0], board_thickness, x_btm_rod_position[1]]) rotate([0, 90 + x_table_tilt, 0])  {
-  x_table();
-  translate([- plate_distance + board_thickness/2, board_thickness/2,  x_rods_span/2]) rotate([0, 90, 0]) {
-    bearing();
-    rotate([90, 0, 0]) translate([0, -(bearing_axle_length-bearing_extrusion_height)/2, 0]) rod_smooth(d=8, l=bearing_axle_length);
-  }
-}
 
 // Bottle grip
  translate([bottle_axle_pos[0], board_thickness*2+10, bottle_axle_pos[1]]) rotate([-90, 0, 0]) bottom_grip();

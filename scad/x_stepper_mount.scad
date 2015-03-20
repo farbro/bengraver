@@ -3,7 +3,6 @@ use <../MCAD/motors.scad>;
 use <common.scad>;
 
 module mount_plate() {
-  strap_margin=3;
   color("white")
   linear_extrude(board_thickness, center=true) 
   difference() {

@@ -8,8 +8,8 @@ bearing_guide
 bottle_bar
 x_carriage
 z_bar
-cogs
 beltguide
+pulley
 btm_plate
 btm_plate2
 btm_grip_support

@@ -1,6 +1,6 @@
 use <formulas.scad>;
 
-$fn=20;
+$fn=100;
 
 // Global
 cut_diam=0.2;
@@ -15,7 +15,7 @@ board_thickness=5.65;
 nut_t=6;
 back_tilt_angle=20;
 
-cable_diam=1.5;
+cable_diam=1.7;
 
 bushings_diam=15;
 bushings_length=24;
@@ -54,14 +54,14 @@ bearing_id=8;
 bottom_extrusion_height=5;
 bottle_top_rod_position=[span_bottom-sin(back_tilt_angle)*span_bottle, cos(back_tilt_angle)*span_bottle];
 
-// Right side
+// Right wall
 bottle_axis_diam=15;
 stepper_slide_distance=0;
 a_stepper_pos=[span_bottom*0.4, 10];
 stepper_rotation=0; //atan((bottle_axle_pos[1]-a_stepper_pos[1])/(bottle_axle_pos[0]-a_stepper_pos[0]));
 servo_distance_from_axle=50;
 
-// Left side
+// Left wall
 
 // X table
 x_carriage_pos=width/5;

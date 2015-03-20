@@ -1,4 +1,6 @@
-include <dimensions.scad>;// By Rob Gilson
+include <dimensions.scad>;
+
+// By Rob Gilson
 // Based on a script by Erik de Bruijn <reprap@erikdebruijn.nl> 
 // License: GPLv2 or later
 //

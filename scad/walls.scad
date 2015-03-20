@@ -60,7 +60,7 @@ module a_stepper_holes(outline=false) {
     }
 }
 
-module side() {
+module wall() {
   union() {
   top_x_position = span_bottom -sin(back_tilt_angle)*span_bottle;
 
@@ -94,11 +94,11 @@ module side() {
     }
 }
 
-module side_rm() {
+module wall_rm() {
   color("white")
   linear_extrude(board_thickness, center=true)
   difference() {
-    side();
+    wall();
     union() {
       translate(bottle_axle_pos) circle(r=bearing_hole_diam/2, center=true);
       translate(a_stepper_pos) rotate([0, 0, stepper_rotation]) nema17_holes(stepper_slide_distance);
@@ -107,33 +107,34 @@ module side_rm() {
       a_stepper_holes(outline=false);
       endstop_hole(inner=true, show=false);
       projection(cut=false) endstop_hole();
-      cable_channel(points=[[front_rod_diam, 0], [a_stepper_pos[0] - 23, a_stepper_pos[1]], [75, 45]]);
-      cable_channel(points=[[75, 45], x_top_rod_position]);
-      cable_channel(points=[[front_rod_diam, 0], x_btm_rod_position]);
+      cable_channel(points=[[front_rod_diam*2, 0], [a_stepper_pos[0] - 23, a_stepper_pos[1]], [75, 45]]);
+      cable_channel(points=[[75, 40], x_top_rod_position]);
+      cable_channel(points=[[front_rod_diam*2, 0], x_btm_rod_position]);
     }
   }
 }
 
-module side_ri() {
+module wall_ri() {
   color("white")
   linear_extrude(board_thickness, center=true)
   difference() {
-    side();
+    wall();
     union() {
       translate(bottle_axle_pos) circle(r=bearing_guide_diam/2, center=true);
       a_stepper_holes(outline=false);
       x_rods_holes();
       belt_guide(inner=false);
       projection(cut=true) endstop_hole();
+      translate([front_rod_diam*2,cable_diam/2]) circle(5/2);
     }
   }
 }
 
-module side_ro() {
+module wall_ro() {
   color("white")
   linear_extrude(board_thickness, center=true)
   difference() {
-    side();
+    wall();
     union() {
       translate(bottle_axle_pos) circle(r=bearing_guide_diam/2, center=true);
       belt_guide(inner=false);
@@ -142,11 +143,11 @@ module side_ro() {
   }
 }
 
-module side_li() {
+module wall_li() {
   color("white")
   linear_extrude(board_thickness, center=true)
   difference() {
-    side();
+    wall();
     union() {
       x_rods_holes();
       x_stepper_strap_holes();
@@ -154,20 +155,20 @@ module side_li() {
   }
 }
 
-module side_lo() {
+module wall_lo() {
   color("white")
   linear_extrude(board_thickness, center=true)
   difference() {
-    side();
+    wall();
     x_stepper_strap_holes();
   }
 }
 
-module side_lm() {
+module wall_lm() {
   color("white")
   linear_extrude(board_thickness, center=true)
   difference() {
-    side();
+    wall();
     union() {
       x_rods_holes();
       x_stepper_strap_holes();
@@ -175,4 +176,4 @@ module side_lm() {
   }
 }
 
-side_l();
+wall_l();

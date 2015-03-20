@@ -1,4 +1,5 @@
 include <dimensions.scad>;
+use <2dTimingPulleyCutout.scad>;
 
 /*
 module btm_grip_support() {
@@ -103,6 +104,15 @@ module top_plate() {
     }
   }
 }*/
+
+module pulley() {
+  pulley_cogs(numTeeth=bottle_pulley_teeth, shaftDiameter=bottle_axle_diam, materialThickness=board_thickness);
+}
+
+module beltguide() {
+  pulley_beltguide(numTeeth=bottle_pulley_teeth, shaftDiameter=bottle_axle_diam, materialThickness=board_thickness);
+}
+
 module btm_plate() {
   t = board_thickness;
   linear_extrude(board_thickness, center=true)
@@ -138,9 +148,11 @@ module top_plate2() {
 
 
 module bottom_grip() {
-  btm_plate2();
-  translate([0, 0, board_thickness]) btm_plate();
-  translate([0, 0, board_thickness]) 
+  beltguide();
+  translate([0, 0, board_thickness]) pulley();
+  translate([0, 0, board_thickness*2]) beltguide();
+  translate([0, 0, board_thickness*3.5]) btm_plate();
+  translate([0, 0, board_thickness*4.5]) 
   for (i=[0:6]) {
     rotate(i*360/6, [0, 0, 1])
     translate([0, 0, -board_thickness/2]) rotate([90, 0, 0]) btm_grip_support(tol=0);
@@ -156,7 +168,6 @@ module top_grip() {
     translate([0, 0, -board_thickness/2]) rotate([90, 0, 0]) top_grip_support();
   }
 }
-
 
 //bottom_grip();
 //btm_grip_support();

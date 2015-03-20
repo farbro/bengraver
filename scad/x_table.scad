@@ -82,7 +82,7 @@ module x_table() {
   translate([0,-board_thickness/2-table_rod_ext, x_rods_span]) rod_smooth(l=x_table_width+table_rod_ext*2+board_thickness, d=table_rods_diam);
 
  // Mount plate
- translate([table_rods_diam/2 + board_thickness/2, x_table_width-x_stepper_mount_length/2, x_rods_span/2]) rotate([90, 90, -90]) mount_plate();
+ translate([table_rods_diam/2 + board_thickness/2, x_table_width-x_stepper_mount_length/2 - board_thickness*2, x_rods_span/2]) rotate([90, 90, -90]) mount_plate();
 }
 
 x_table();

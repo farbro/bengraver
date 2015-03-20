@@ -65,14 +65,14 @@ x_a_distance=85;
 x_table_tilt=0;
 x_rods_span=50;
 rod_ext=10;
-table_rod_ext=10;
+table_rod_ext=0;
 table_rods_diam=8;
 
 // X stepper mount
 x_stepper_mount_length = 40;
 x_stepper_mount_width = x_rods_span + 10;
 
-x_table_width=width+x_stepper_mount_length + 2*board_thickness;
+x_table_width=width;
 
 // X carriage
 //carriage_length= 24; // single bushing

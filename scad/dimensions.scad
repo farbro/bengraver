@@ -1,15 +1,17 @@
 use <formulas.scad>;
 
-$fn=40;
+$fn=100;
 
 // Global
+cut_diam=0.2;
+
 span_bottle=100; 
 bottle_rod_diam=10; 
 front_rod_diam=10; 
 width=470;
 span_bottom=160; // Bottom rods span
 span_bottle=120; // Bottle rods span
-board_thickness=6;
+board_thickness=5.65;
 nut_t=6;
 back_tilt_angle=20;
 
@@ -28,7 +30,7 @@ bottle_grip_bottom_height=6;
 bottle_grip_bottom_cone_height=4;
 
 bottle_grip_top_diam=50;
-bottle_grip_top_height=5;
+bottle_grip_top_height=7;
 bottle_grip_top_cone_height=20;
 bottle_grip_top_diam=50;
 bottle_grip_top_inner_diam=45;
@@ -51,7 +53,7 @@ bottle_top_rod_position=[span_bottom-sin(back_tilt_angle)*span_bottle, cos(back_
 
 // Right side
 bottle_axis_diam=15;
-stepper_slide_distance=10;
+stepper_slide_distance=0;
 a_stepper_pos=[span_bottom*0.4, 10];
 stepper_rotation=atan((bottle_axle_pos[1]-a_stepper_pos[1])/(bottle_axle_pos[0]-a_stepper_pos[0]));
 servo_distance_from_axle=50;
@@ -127,6 +129,7 @@ toothType = 1; // 1 = slightly rounded, 2 = oval sharp, 3 = square. For square, 
 // Belt properties:
 pitch = 2; // distance between the teeth
 beltWidth = 6; // the width/height of the belt. The (vertical) size of the pulley is adapted to this.
-beltThickness = 0.65; // thickness of the part excluding the notch depth!
-notchDepth = 0.8; // make it slightly bigger than actual, there's an outward curvature in the inner solid part of the pulley
+beltThickness = 0.63; // thickness of the part excluding the notch depth!
+notchDepth = 0.75; // make it slightly bigger than actual, there's an outward curvature in the inner solid part of the pulley
 toothWidth = 1.2; // Teeth of the PULLEY, that is.
+

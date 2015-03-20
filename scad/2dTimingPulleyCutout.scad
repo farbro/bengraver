@@ -53,7 +53,7 @@ module pulley() {
 
 // Cogs plate
 module pulley_cogs(numTeeth=11, shaftDiameter=4.95, materialThickness=6, screwWidth=3/2) {
-  pulleyRadius = pitch*numTeeth/(PI*2); 
+  pulleyRadius = pitch*numTeeth/(PI*2) - notchDepth; 
   shaftRadius = shaftDiameter/2;
   //	for (layer = [0:(beltWidth/materialThickness)])
   //		translate(v = [(pulleyRadius+notchDepth+1)*layer*2,0,0]) 

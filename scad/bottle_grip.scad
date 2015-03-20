@@ -1,48 +1,168 @@
 include <dimensions.scad>;
-use <../MCAD/nuts_and_bolts.scad>;
-use <2dTimingPulleyCutout.scad>;
 
-module beltguide() {
-    pulley_beltguide(bottle_pulley_teeth, bottle_axle_diam, board_thickness, 0);
-}
-
-module cogs() {
-  pulley_cogs(bottle_pulley_teeth, bottle_axle_diam, board_thickness , 0);
-}
-
-module bottom_grip() {
-  color("yellow") {
-    beltguide();
-    translate([0, 0, board_thickness]) cogs();
-  }
-
-  translate([0, 0, board_thickness*2]) 
-  color("darkslategray")
+/*
+module btm_grip_support() {
+  t = board_thickness-0.2;
+  margin = 5;
+  linear_extrude(t, center=true)
+  union() {
     difference() {
       union() {
-        cylinder(r=bottle_grip_bottom_diam/2, h=bottle_grip_bottom_height);
-        translate([0, 0, bottle_grip_bottom_height]) cylinder(h=bottle_grip_bottom_cone_height, r1=bottle_grip_bottom_diam/2, r2=bottle_axle_diam/2);
+        translate([0, t + margin]) scale([bottle_grip_bottom_diam/2, bottle_grip_bottom_height]) circle();
+        square([bottle_grip_bottom_diam/2, t + margin]);
       }
       union() {
-        translate([0,0, -1]) cylinder(r=bottle_axle_diam/2, h=bottle_grip_bottom_height+bottle_grip_bottom_cone_height + 2);
-        translate([0,0,bottle_grip_bottom_height+bottle_grip_bottom_cone_height+0.01]) mirror([0,0,1]) nutHole(size=bottle_axle_diam);
+        mirror([1, 0, 0]) square([1000, 1000]);
+        mirror([0, 1, 0]) translate([-500, 0, 0]) square([1000, 1000]);
+       translate([0, -1]) square([bottle_axle_diam/2 + 1, t + 2]);
+       translate([0, t]) square([14.2/2, bottle_grip_bottom_height + margin + 1]);
+       translate([bottle_axle_diam + 5, -1]) square([t*2, t+1]);
+       translate([bottle_grip_bottom_diam/2 - t - 4, -1]) square([t, t+1]);
+       square([bottle_grip_bottom_diam/2 - t - 4, 0.5]);
       }
     }
+  points=[[0, 0], [-5, 0], [0, -3]];
+  translate([bottle_grip_bottom_diam/2, 0]) polygon(points);
+  //translate([bottle_axle_diam + 1, 0]) mirror([1, 0, 0]) polygon(points);
+  }
+  
+}
+*/
+
+module btm_grip_support() {
+  t = board_thickness;
+  l=bottle_grip_bottom_diam/2;
+  margin=6;
+
+  points = [
+    [bottle_axle_diam/2, 0.5],
+    [15, 0.5],
+    [15, t],
+    [20, t],
+    [20, 0.5],
+    [30, 0.5],
+    [30, t],
+    [35, t],
+    [35, 0.5],
+    [l, 0.5],
+    [l, t + margin],
+    [16/2, t + margin + bottle_grip_bottom_height],
+  ];
+
+  linear_extrude(t, center=true)
+    polygon(points);
+}
+
+module top_grip_support() {
+  t = board_thickness;
+  l=bottle_grip_top_diam/2;
+  margin=6;
+
+  points = [
+    [bottle_axle_diam/2, 0.5],
+    [10, 0.5],
+    [10, t],
+    [20, t],
+    [20, 0.5],
+    [30, 0.5],
+    [l, 0.5],
+    [l, t + margin + bottle_grip_top_height],
+    [16/2, t + margin],
+  ];
+
+  linear_extrude(t, center=true)
+    polygon(points);
+}
+
+module top_plate() {
+  t = board_thickness;
+  linear_extrude(board_thickness, center=true)
+  difference() {
+    circle(r=bottle_grip_top_diam/2);
+    circle(r=bottle_axle_diam/2 + 2);
+    union() {
+      for (i=[0:6]) {
+        rotate(i*360/6, [0, 0, 1])
+          projection(cut=true) translate([0, 0, -t/2]) rotate([90, 0, 0]) top_grip_support();
+      }
+    }
+  }
+}
+
+/*module btm_plate() {
+  t = board_thickness - 0.2;
+  linear_extrude(board_thickness, center=true)
+  difference() {
+    circle(r=bottle_grip_bottom_diam/2);
+    circle(r=bottle_axle_diam/2 + 2);
+    union() {
+      for (i=[0:6]) {
+        rotate(i*360/6, [0, 0, 1])
+          projection(cut=true) translate([0, 0, -t/2]) rotate([90, 0, 0]) btm_grip_support();
+      }
+    }
+  }
+}*/
+module btm_plate() {
+  t = board_thickness;
+  linear_extrude(board_thickness, center=true)
+  difference() {
+    circle(r=bottle_grip_bottom_diam/2);
+    circle(r=bottle_axle_diam/2 + 2);
+    union() {
+      for (i=[0:6]) {
+        rotate(i*360/6, [0, 0, 1])
+          projection(cut=true) translate([0, 0, -t/2]) rotate([90, 0, 0]) btm_grip_support();
+      }
+    }
+  }
+}
+
+
+module btm_plate2() {
+  linear_extrude(board_thickness, center=true) 
+  difference() {
+    circle(r=bottle_grip_bottom_diam/2);
+    circle(bottle_axle_diam/2);
+  }
+}
+
+module top_plate2() {
+  linear_extrude(board_thickness, center=true) 
+  difference() {
+    circle(r=bottle_grip_top_diam/2);
+    circle(bottle_axle_diam/2);
+  }
+}
+
+
+
+module bottom_grip() {
+  btm_plate2();
+  translate([0, 0, board_thickness]) btm_plate();
+  translate([0, 0, board_thickness]) 
+  for (i=[0:6]) {
+    rotate(i*360/6, [0, 0, 1])
+    translate([0, 0, -board_thickness/2]) rotate([90, 0, 0]) btm_grip_support(tol=0);
+  }
 }
 
 module top_grip() {
-  color("darkslategray")
-    difference() {
-      union() {
-        cylinder(r=bottle_grip_top_diam/2, h=bottle_grip_top_height+bottle_grip_top_cone_height-0.001);
-      }
-      union() {
-        translate([0, 0, bottle_grip_top_height+0.01]) cylinder(h=bottle_grip_top_cone_height, r2=bottle_grip_top_inner_diam/2, r1=0);
-        translate([0,0,-0.01]) boltHole(size=bottle_axle_diam, length=bottle_grip_top_height+bottle_grip_top_cone_height);
-        translate([0,0,bottle_grip_top_height])  mirror([0,0,0]) resize([0, 0, 50]) circle();
-      }
-    }
+  top_plate2();
+  translate([0, 0, board_thickness]) top_plate();
+  translate([0, 0, board_thickness]) 
+  for (i=[0:6]) {
+    rotate(i*360/6, [0, 0, 1])
+    translate([0, 0, -board_thickness/2]) rotate([90, 0, 0]) top_grip_support();
+  }
 }
 
-$fn=100;
-bottom_grip();
+
+//bottom_grip();
+//btm_grip_support();
+//btm_plate();
+//bottom_grip();
+//top_grip_support();
+//top_plate();
+top_grip();
+

@@ -21,17 +21,28 @@ module x_rods_holes() {
     translate(x_btm_rod_position) { circle(table_rods_diam/2); }
 }
 
-module endstop_hole(inner=true) {
+module endstop_hole() {
   translate([(x_top_rod_position[0] + x_btm_rod_position[0])/2, (x_top_rod_position[1] + x_btm_rod_position[1])/2]) rotate([0, 0, -x_table_tilt+90])
   translate([plate_distance, - carriage_height/2])  
   rotate([180, 0, 180]) {
-      projection(cut=!inner) endstop();
+      endstop();
   }
 
 }
 
 module cable_channel(points) {
 
+}
+
+module x_stepper_strap_holes() {
+  translate([(x_top_rod_position[0] + x_btm_rod_position[0])/2, (x_top_rod_position[1] + x_btm_rod_position[1])/2]) rotate([0, 0, -x_table_tilt+90])
+  translate([-table_rods_diam/2 - board_thickness/2, 0]) { 
+    translate([board_thickness/2 + strap_hole_dim[1]/2, x_rods_span/2 - table_rods_diam/2 - strap_hole_dim[0] - strap_margin]) rotate([0, 0, 90]) square(strap_hole_dim, center=true);
+    translate([-(board_thickness/2 + strap_hole_dim[1]/2), x_rods_span/2 - table_rods_diam/2 - strap_hole_dim[0] - strap_margin]) rotate([0, 0, 90]) square(strap_hole_dim, center=true);
+
+    translate([board_thickness/2 + strap_hole_dim[1]/2, -(x_rods_span/2 - table_rods_diam/2 - strap_hole_dim[0] - strap_margin)]) rotate([0, 0, 90]) square(strap_hole_dim, center=true);
+    translate([-(board_thickness/2 + strap_hole_dim[1]/2),-(x_rods_span/2 - table_rods_diam/2 - strap_hole_dim[0] - strap_margin)]) rotate([0, 0, 90]) square(strap_hole_dim, center=true);
+  }
 }
 
 module a_stepper_holes(outline=false) {
@@ -90,6 +101,7 @@ module side_rm() {
       x_rod_holes();
       a_stepper_holes(outline=false);
       endstop_hole(inner=true, show=false);
+      projection(cut=false) endstop_hole();
     }
   }
 }
@@ -104,7 +116,7 @@ module side_ri() {
       a_stepper_holes(outline=false);
       x_rods_holes();
       belt_guide(inner=false);
-      endstop_hole(inner=false, show=true);
+      projection(cut=true) endstop_hole();
     }
   }
 }
@@ -129,6 +141,7 @@ module side_li() {
     side();
     union() {
       x_rods_holes();
+      x_stepper_strap_holes();
     }
   }
 }
@@ -138,6 +151,7 @@ module side_lo() {
   linear_extrude(board_thickness, center=true)
   difference() {
     side();
+    x_stepper_strap_holes();
   }
 }
 
@@ -148,6 +162,7 @@ module side_lm() {
     side();
     union() {
       x_rods_holes();
+      x_stepper_strap_holes();
     }
   }
 }

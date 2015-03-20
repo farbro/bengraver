@@ -20,6 +20,7 @@ bushings_length=24;
 bushings_hole_length=24.2;
 
 strap_hole_dim=[4, 2];
+strap_margin=3;
 
 // Bottle grip
 bottle_axle_diam=8;
@@ -43,7 +44,7 @@ axle_position=[0,0];
 break_position=[70, 50];
 axis_z=40;
 bearing_extrusion_height=7.2;
-bearing_extrusion_length=26;
+bearing_extrusion_length=24;
 bearing_axle_length=20;
 bearing_id=8;
 
@@ -70,10 +71,11 @@ table_rod_ext=0;
 table_rods_diam=8;
 
 // X stepper mount
-x_stepper_mount_length = 40;
+x_stepper_mount_length = 50;
 x_stepper_mount_width = x_rods_span + 10;
+x_stepper_mount_shift=(22-9)/2;
 
-x_table_width=width;
+x_table_width=width - board_thickness*2;
 
 // X carriage
 //carriage_length= 24; // single bushing
@@ -102,7 +104,7 @@ x_top_rod_position=[bottle_axle_pos[0] - cos(x_table_tilt)*(x_a_distance) + sin(
 x_btm_rod_position=[bottle_axle_pos[0] - cos(x_table_tilt)*(x_a_distance + x_rods_span) + sin(x_table_tilt)*(-xz_span), bottle_axle_pos[1] + sin(x_table_tilt)*(x_a_distance + x_rods_span) + cos(x_table_tilt)*(-xz_span)];
 
 // Bottle
-bottle_pos=30;
+bottle_pos=40;
 bottle_diam=100;
 bottle_height=360;
 

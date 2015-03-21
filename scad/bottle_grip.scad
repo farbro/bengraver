@@ -149,11 +149,12 @@ module bottom_grip() {
   beltguide();
   translate([0, 0, board_thickness]) pulley();
   translate([0, 0, board_thickness*2]) beltguide();
-  translate([0, 0, board_thickness*3.5]) btm_plate();
-  translate([0, 0, board_thickness*4.5]) 
-  for (i=[0:6]) {
-    rotate(i*360/6, [0, 0, 1])
-    translate([0, 0, -board_thickness/2]) rotate([90, 0, 0]) btm_grip_support(tol=0);
+  translate([0, 0, board_thickness*3.5]) {
+    btm_plate();
+    for (i=[0:6]) {
+      rotate(i*360/6, [0, 0, 1])
+      translate([0, 0, -board_thickness/2]) rotate([90, 0, 0]) btm_grip_support(tol=0);
+    }
   }
 }
 

@@ -12,7 +12,24 @@ module belt_guide(inner=true) {
       square([bearing_axle_length, bearing_id], center=true);
     else
       square([bearing_axle_length, arc_distance(bearing_id/2, bearing_id/2 - board_thickness/2)], center=true);
-      
+  }
+}
+
+module belt_tensioner_hole(inner=false) {
+  if (inner) {
+    circle(belt_tensioner_stroke/2 + belt_tensioner_bolt_diam/2);
+  }
+  else {
+    circle(belt_tensioner_stroke/2 + belt_tensioner_bolt_diam/2 + belt_tensioner_axle_margin); 
+  }
+}
+
+module belt_tensioner() {
+  color("lightgray")
+  linear_extrude(board_thickness, center=true)
+  difference() {
+    belt_tensioner_hole(inner=false);
+    translate([0, -belt_tensioner_stroke/2]) circle(belt_tensioner_bolt_diam/2);
   }
 }
 
@@ -107,6 +124,8 @@ module wall_rm() {
       a_stepper_holes(outline=false);
       endstop_hole(inner=true, show=false);
       projection(cut=false) endstop_hole();
+      translate(belt_tensioner_position) belt_tensioner_hole(inner=true);
+
       cable_channel(points=[[front_rod_diam*2, 0], [a_stepper_pos[0] - 23, a_stepper_pos[1]], [75, 45]]);
       cable_channel(points=[[75, 40], x_top_rod_position]);
       cable_channel(points=[[front_rod_diam*2, 0], x_btm_rod_position]);
@@ -125,6 +144,7 @@ module wall_ri() {
       x_rods_holes();
       belt_guide(inner=false);
       projection(cut=true) endstop_hole();
+      translate(belt_tensioner_position) belt_tensioner_hole(inner=false);
       translate([front_rod_diam*2,cable_diam/2]) circle(5/2);
     }
   }
@@ -139,6 +159,7 @@ module wall_ro() {
       translate(bottle_axle_pos) circle(r=bearing_guide_diam/2, center=true);
       belt_guide(inner=false);
       a_stepper_holes(outline=true);
+      translate(belt_tensioner_position) belt_tensioner_hole(inner=false);
     }
   }
 }

@@ -14,15 +14,29 @@ x_table_bar_dist = 3;
 
 // Sides
 rotate([90,0,0]) {
-  //wall_ro();
+  wall_ro();
+  translate(belt_tensioner_position) belt_tensioner();
   translate([0, 0, -board_thickness]) {
     wall_rm();
     translate([0, 0, -board_thickness/2]) endstop_hole();
+    translate([belt_tensioner_position[0], belt_tensioner_position[1] - belt_tensioner_stroke/2, 0]) {
+      translate([0, 0, board_thickness*1.5 + rod_ext]) rotate([-90, 0, 0]) rod_threaded(d=belt_tensioner_bolt_diam, l=rod_ext*2 + board_thickness*3 + belt_tensioner_elevation + 7);
+      translate([0, 0, -board_thickness*1.5 - belt_tensioner_elevation - 7]) bearing();
+
+    }
   }
-  translate([0, 0, -2*board_thickness]) wall_ri();
+
+  translate([0, 0, -2*board_thickness]) {
+    wall_ri();
+    translate(belt_tensioner_position) belt_tensioner();
+  }
+
   translate([bottle_axle_pos[0], bottle_axle_pos[1], -board_thickness + 7/2]) bearing();
   translate([bottle_axle_pos[0], bottle_axle_pos[1], -board_thickness*2 - 7/2]) bearing();
-  translate([a_stepper_pos[0], a_stepper_pos[1], -board_thickness]) rotate([0, 180, stepper_rotation]) stepper_motor_mount(17);
+  translate([a_stepper_pos[0], a_stepper_pos[1], -board_thickness]) { 
+    rotate([0, 180, stepper_rotation]) stepper_motor_mount(17);
+
+  }
 }
 translate([0, width, 0]) rotate([90, 0, 0]) wall_lo();
 translate([0, width-board_thickness, 0]) rotate([90, 0, 0]) wall_lm();
@@ -41,7 +55,7 @@ translate([x_btm_rod_position[0], board_thickness, x_btm_rod_position[1]]) rotat
 }
 
 // Bottle grip
- translate([bottle_axle_pos[0], board_thickness*2+10, bottle_axle_pos[1]]) rotate([-90, 0, 0]) bottom_grip();
+ translate([bottle_axle_pos[0], board_thickness*2.5 + 2.3, bottle_axle_pos[1]]) rotate([-90, 0, 0]) bottom_grip();
 
  translate([bottle_axle_pos[0], bottle_bar_pos-board_thickness/2-3, bottle_axle_pos[1]]) rotate([90, 0, 0]) top_grip();
  translate([bottle_axle_pos[0], bottle_bar_pos-7/2+board_thickness/2, bottle_axle_pos[1]]) rotate([90, 0, 0]) bearing();
@@ -53,7 +67,7 @@ translate([x_btm_rod_position[0], board_thickness, x_btm_rod_position[1]]) rotat
 translate([span_bottom, 0, 0])
   rotate([0, -back_tilt_angle, 0])
 union() {
-  translate([0,bottle_pos,span_bottle/2]) rotate(90, [1,0,0]) translate([0, 0, 0]) mirror([0, 0, 1]) bottle();
+  //translate([0,bottle_pos,span_bottle/2]) rotate(90, [1,0,0]) translate([0, 0, 0]) mirror([0, 0, 1]) bottle();
   // Bottle bar
   translate([0, bottle_bar_pos, 0]) bearing_guide();
 

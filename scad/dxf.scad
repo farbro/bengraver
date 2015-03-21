@@ -5,12 +5,12 @@ use <x_stepper_mount.scad>;
 use <x_table.scad>;
 use <bottle_grip.scad>;
 
-$fn=export_fn;
+$fn=100;
 
-scale(export_scale)
+scale([export_scale, export_scale, export_scale])
 minkowski() {
   circle(cut_diam/2);
-  projection() {
+  projection(cut=true) {
     if (wall_ri)           wall_ri();
     if (wall_ro)           wall_ro();
     if (wall_li)           wall_li();
@@ -29,6 +29,7 @@ minkowski() {
     if (top_grip_support)  top_grip_support();
     if (top_plate)         top_plate();
     if (top_plate2)        top_plate2();
+    if (belt_tensioner)    belt_tensioner();
 
     cogs();
   }

@@ -31,7 +31,7 @@ module bottle_bar() {
 }
 
 module z_bar() {
-  bar(s=z_rods_span, width=z_bar_width, hole_d=z_rods_diam, t=board_thickness, m_hole_d=8, s_m=z_rods_span/2);
+  bar(s=z_rods_span, width=z_bar_width, hole_d=z_rods_diam, t=board_thickness, m_hole_d=toolbit_mount_diam, s_m=z_rods_span/2);
 }
 
 bearing_guide();

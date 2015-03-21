@@ -44,7 +44,6 @@ include <dimensions.scad>;
 // OpenSCAD SCRIPT
 // //////////////////////////////
 
-PI = 3.15159265; 
 $fs=0.2; // def 1, 0.2 is high res 
 $fa=3; //def 12, 3 is very nice
 
@@ -80,7 +79,7 @@ module pulley_cogs(numTeeth=11, shaftDiameter=4.95, materialThickness=6, screwWi
 
 //Nut Trap Clamp/Belt Guide Component
 module pulley_beltguide(numTeeth=11, shaftDiameter=4.95, materialThickness=6, screwWidth=3/2) {
-  pulleyRadius = pitch*numTeeth/(PI*2); 
+  pulleyRadius = pitch*numTeeth/(PI*2) - notchDepth; 
   shaftRadius = shaftDiameter/2;
   linear_extrude(materialThickness)
   pulleyOutline(pulleyRadius+notchDepth+beltThickness, shaftRadius, pulleyRadius, screwWidth);

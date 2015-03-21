@@ -1,11 +1,13 @@
 use <formulas.scad>;
 
-$fn=20;
+$fn=50;
 export_fn=100;
 export_scale=0.03937; // scales down mm->inches (useful if your laser cutter uses inches)
+cut_diam=0.2;
 
 // Global
-cut_diam=0.2;
+PI = 3.15159265; 
+
 
 span_bottle=100; 
 bottle_rod_diam=10; 
@@ -61,7 +63,7 @@ bottle_axis_diam=15;
 stepper_slide_distance=0;
 a_stepper_pos=[span_bottom*0.4, 10];
 stepper_rotation=0; //atan((bottle_axle_pos[1]-a_stepper_pos[1])/(bottle_axle_pos[0]-a_stepper_pos[0]));
-servo_distance_from_axle=50;
+
 
 // Left wall
 
@@ -70,7 +72,7 @@ x_carriage_pos=width/5;
 x_a_distance=85;
 x_table_tilt=0;
 x_rods_span=50;
-rod_ext=10;
+rod_ext=8;
 table_rod_ext=0;
 table_rods_diam=8;
 
@@ -107,6 +109,8 @@ xz_span = plate_distance + z_plate_dist + board_thickness/2;
 x_top_rod_position=[bottle_axle_pos[0] - cos(x_table_tilt)*(x_a_distance) + sin(x_table_tilt)*(-xz_span), bottle_axle_pos[1] + sin(x_table_tilt)*(x_a_distance) + cos(x_table_tilt)*(-xz_span)];
 x_btm_rod_position=[bottle_axle_pos[0] - cos(x_table_tilt)*(x_a_distance + x_rods_span) + sin(x_table_tilt)*(-xz_span), bottle_axle_pos[1] + sin(x_table_tilt)*(x_a_distance + x_rods_span) + cos(x_table_tilt)*(-xz_span)];
 
+toolbit_mount_diam=4.8;
+
 // Bottle
 bottle_pos=40;
 bottle_diam=100;
@@ -139,4 +143,19 @@ beltWidth = 6; // the width/height of the belt. The (vertical) size of the pulle
 beltThickness = 0.63; // thickness of the part excluding the notch depth!
 notchDepth = 0.75; // make it slightly bigger than actual, there's an outward curvature in the inner solid part of the pulley
 toothWidth = 1.2; // Teeth of the PULLEY, that is.
+pulleyRadius = pitch*bottle_pulley_teeth/(PI*2) - notchDepth;
+
+a_stepper_teeth=11;
+a_stepper_pulley_radius=4.2;
+
+
+// Belt tensioner
+echo(belt_tensioner_position[1], "Tensioner position");
+echo(a_stepper_pulley_radius, "11t radius");
+belt_tensioner_bolt_diam=7.8;
+belt_tensioner_elevation=8;
+belt_tensioner_stroke=10;
+belt_tensioner_axle_margin=3;
+belt_tensioner_xpos = 105;
+belt_tensioner_position=[belt_tensioner_xpos, a_stepper_pos[1] - a_stepper_pulley_radius + (bottle_axle_pos[1] - pulleyRadius - a_stepper_pos[1] + a_stepper_pulley_radius)/(bottle_axle_pos[0] - a_stepper_pos[0])*(belt_tensioner_xpos-a_stepper_pos[0]) + belt_tensioner_stroke/2 - 22/2];
 

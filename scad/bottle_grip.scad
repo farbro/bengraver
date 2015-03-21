@@ -145,8 +145,6 @@ module top_plate2() {
   }
 }
 
-
-
 module bottom_grip() {
   beltguide();
   translate([0, 0, board_thickness]) pulley();

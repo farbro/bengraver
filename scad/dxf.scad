@@ -5,6 +5,9 @@ use <x_stepper_mount.scad>;
 use <x_table.scad>;
 use <bottle_grip.scad>;
 
+$fn=export_fn;
+
+scale(export_scale)
 minkowski() {
   circle(cut_diam/2);
   projection() {

@@ -1,6 +1,8 @@
 use <formulas.scad>;
 
-$fn=100;
+$fn=20;
+export_fn=100;
+export_scale=0.03937; // scales down mm->inches (useful if your laser cutter uses inches)
 
 // Global
 cut_diam=0.2;

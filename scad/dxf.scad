@@ -29,6 +29,7 @@ offset(delta=cut_diam/2)
     if (top_plate)         top_plate();
     if (top_plate2)        top_plate2();
     if (belt_tensioner)    belt_tensioner();
+    if (belt_clamp)        belt_clamp();
 
     cogs();
   }

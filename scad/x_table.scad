@@ -6,6 +6,26 @@ use <bar.scad>;
 use <solenoid.scad>;
 use <x_stepper_mount.scad>;
 use <../MCAD/hardware.scad>;
+include <timing_belts.scad>;
+
+module belt_clamp() {
+  module belt_extrusion() {
+    translate([-carriage_length/2, 22/2]) projection(cut=true) mirror([0,1,0]) belt_angle(prf = tGT2_2, bwdth = 1, angle=60, rad=15);
+  }
+
+  color("white")
+  linear_extrude(board_thickness, center=true)
+    difference() {
+      intersection() {
+        square([carriage_length, x_rods_span - 15], center=true);
+        projection() x_carriage();
+      }
+      {
+         belt_extrusion();
+         mirror([1, 0, 0]) belt_extrusion();
+      }
+    }
+}
 
 module x_carriage() {
   module bushings_extrusion(length, height) {
@@ -17,7 +37,9 @@ module x_carriage() {
   }
 
   module z_bar () {
+    bar();
   }
+
 
   module bearing_holes() {
     // X bushings extrusion
@@ -56,6 +78,7 @@ module x_table() {
     // Carriage plates
 
     translate([-plate_distance, 0, x_rods_span/2]) rotate([90, 0, 90]) x_carriage();
+    translate([-plate_distance + board_thickness, 0, x_rods_span/2]) rotate([90, 0, 90]) belt_clamp();
 
     // Solenoid
     translate([-plate_distance - board_thickness/2, 0, x_rods_span/2 + solenoid_pos]) rotate([0, -90, 0])  solenoid();
@@ -85,4 +108,4 @@ module x_table() {
  translate([table_rods_diam/2 + board_thickness/2, x_table_width-x_stepper_mount_length/2 - board_thickness*2, x_rods_span/2]) rotate([90, 90, -90]) mount_plate();
 }
 
-x_table();
+belt_clamp();

@@ -10,14 +10,14 @@ include <timing_belts.scad>;
 
 module belt_clamp() {
   module belt_extrusion() {
-    translate([-carriage_length/2, 22/2]) projection(cut=true) mirror([0,1,0]) belt_angle(prf = tGT2_2, bwdth = 1, angle=60, rad=15);
+    translate([-(carriage_length + carriage_rounding_radius*2)/2, 22/2]) projection(cut=true) mirror([0,1,0]) belt_angle(prf = tGT2_2, bwdth = 1, angle=30, rad=30);
   }
 
   color("white")
   linear_extrude(board_thickness, center=true)
     difference() {
       intersection() {
-        square([carriage_length, x_rods_span - 15], center=true);
+        translate([-carriage_length/2 - carriage_rounding_radius, x_stepper_mount_shift - x_stepper_pulley_radius]) square([carriage_length + carriage_rounding_radius*2, x_rods_span/2 - (x_stepper_mount_shift - x_stepper_pulley_radius)]);
         projection() x_carriage();
       }
       {

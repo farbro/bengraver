@@ -147,6 +147,7 @@ pulleyRadius = pitch*bottle_pulley_teeth/(PI*2) - notchDepth;
 
 a_stepper_teeth=11;
 a_stepper_pulley_radius=4.2;
+x_stepper_pulley_radius=4.2;
 
 
 // Belt tensioner

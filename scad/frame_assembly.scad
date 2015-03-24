@@ -7,6 +7,7 @@ use <bottle.scad>;
 use <bottle_driver.scad>;
 use <../MCAD/motors.scad>;
 use <bottle_grip.scad>;
+use <electronics_mount.scad>;
 use <timingPulley-v2.scad>;
 use <../MCAD/bearing.scad>;
 
@@ -79,3 +80,5 @@ union() {
   translate([0,-board_thickness/2 - nut_t,0]) rod_threaded(d=bottle_rod_diam, l=width+board_thickness+nut_t*2);
   translate([0,-board_thickness/2 - nut_t,span_bottle]) rod_threaded(d=bottle_rod_diam, l=width+board_thickness+nut_t*2);
 }
+
+translate([span_bottom/2, electronics_mount_pos, -front_rod_diam/2 - board_thickness/2]) electronics_mount();

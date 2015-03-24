@@ -1,5 +1,12 @@
 include <dimensions.scad>;
 
+module strap_holes(pos=[0,0], rot=0, span=8) {
+  translate(pos) rotate([0,0,rot]) {
+    translate([0,-span/2]) square(strap_hole_dim, center=true);
+    translate([0,span/2]) square(strap_hole_dim, center=true);
+  }
+}
+
 module nema17_holes(slide) {
   shaft_d = 22;
   screw_d=3;

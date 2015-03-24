@@ -161,3 +161,7 @@ belt_tensioner_xpos = 105;
 belt_tensioner_position=[belt_tensioner_xpos, a_stepper_pos[1] - a_stepper_pulley_radius + (bottle_axle_pos[1] - pulleyRadius - a_stepper_pos[1] + a_stepper_pulley_radius)/(bottle_axle_pos[0] - a_stepper_pos[0])*(belt_tensioner_xpos-a_stepper_pos[0]) + belt_tensioner_stroke/2 - 22/2];
 
 x_belt_clamp_len=21;
+
+electronics_mount_length=70;
+electronics_mount_pos=80;
+arduino_hole_diam=1;

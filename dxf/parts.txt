@@ -18,3 +18,4 @@ top_plate
 top_plate2
 belt_tensioner
 belt_clamp
+electronics_mount

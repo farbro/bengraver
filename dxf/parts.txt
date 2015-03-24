@@ -1,4 +1,5 @@
 wall_ri
+wall_rm
 wall_ro
 wall_li
 wall_lm

@@ -4,13 +4,16 @@ use <bar.scad>;
 use <x_stepper_mount.scad>;
 use <x_table.scad>;
 use <bottle_grip.scad>;
+use <electronics_mount.scad>;
 
-$fn=100;
+$fa=0.1;
+$fs=0.1;
 
 scale([export_scale, export_scale, export_scale])
 offset(delta=cut_diam/2)
   projection(cut=true) {
     if (wall_ri)           wall_ri();
+    if (wall_ro)           wall_rm();
     if (wall_ro)           wall_ro();
     if (wall_li)           wall_li();
     if (wall_lm)           wall_lm();

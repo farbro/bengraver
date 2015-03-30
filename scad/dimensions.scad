@@ -23,12 +23,13 @@ cable_diam=1.7;
 
 bushings_diam=15;
 bushings_length=24;
-bushings_hole_length=24.2;
+bushings_hole_length=24;
 
 strap_hole_dim=[4, 2];
 strap_margin=3;
 
 // Bottle grip
+grip_margin=11;
 bottle_axle_diam=8;
 bottle_axle_pos=[span_bottom-sin(back_tilt_angle)*span_bottle/2, cos(back_tilt_angle)*span_bottle/2];
 
@@ -87,12 +88,12 @@ x_table_width=width - board_thickness*2;
 //carriage_length= 24; // single bushing
 carriage_length=65; // double bushings
 carriage_height=x_rods_span+20;
-carriage_rounding_radius = 10;
-carriage_bushing_hole_width = 10.5;
-z_rods_length=70;
+carriage_rounding_radius = 5;
+carriage_bushing_hole_width = 10;
+z_rods_length=120;
 z_rods_diam=8;
 z_bar_width=20;
-z_pos=-10;
+z_pos=40;
 z_bushings_diam=15;
 z_bolt_diam=3;
 z_rods_span=41;
@@ -103,6 +104,12 @@ plate_distance = sqrt(pow(bushings_diam/2, 2) - pow(carriage_bushing_hole_width/
 echo("Plate distance:", plate_distance*2 + board_thickness);
 z_plate_dist = 5;
 z_bushings_hole_width = 2*sqrt(pow(bushings_diam/2, 2) - pow(z_plate_dist, 2));
+nut_guide_hole_width=10;
+nut_guide_hole_length=30;
+nut_guide_height=z_plate_dist*2;
+nut_guide_width=20;
+z_leadscrew_diam=5;
+carriage_screw_diam=8;
 
 // Calculations for x table position
 xz_span = plate_distance + z_plate_dist + board_thickness/2;

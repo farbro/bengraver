@@ -4,19 +4,19 @@ use <2dTimingPulleyCutout.scad>;
 /*
 module btm_grip_support() {
   t = board_thickness-0.2;
-  margin = 5;
+  grip_margin = 5;
   linear_extrude(t, center=true)
   union() {
     difference() {
       union() {
-        translate([0, t + margin]) scale([bottle_grip_bottom_diam/2, bottle_grip_bottom_height]) circle();
-        square([bottle_grip_bottom_diam/2, t + margin]);
+        translate([0, t + grip_margin]) scale([bottle_grip_bottom_diam/2, bottle_grip_bottom_height]) circle();
+        square([bottle_grip_bottom_diam/2, t + grip_margin]);
       }
       union() {
         mirror([1, 0, 0]) square([1000, 1000]);
         mirror([0, 1, 0]) translate([-500, 0, 0]) square([1000, 1000]);
        translate([0, -1]) square([bottle_axle_diam/2 + 1, t + 2]);
-       translate([0, t]) square([14.2/2, bottle_grip_bottom_height + margin + 1]);
+       translate([0, t]) square([14.2/2, bottle_grip_bottom_height + grip_margin + 1]);
        translate([bottle_axle_diam + 5, -1]) square([t*2, t+1]);
        translate([bottle_grip_bottom_diam/2 - t - 4, -1]) square([t, t+1]);
        square([bottle_grip_bottom_diam/2 - t - 4, 0.5]);
@@ -33,7 +33,6 @@ module btm_grip_support() {
 module btm_grip_support() {
   t = board_thickness;
   l=bottle_grip_bottom_diam/2;
-  margin=6;
 
   points = [
     [bottle_axle_diam/2, 0.5],
@@ -46,8 +45,8 @@ module btm_grip_support() {
     [35, t],
     [35, 0.5],
     [l, 0.5],
-    [l, t + margin],
-    [16/2, t + margin + bottle_grip_bottom_height],
+    [l, t + grip_margin],
+    [16/2, t + grip_margin + bottle_grip_bottom_height],
   ];
 
   linear_extrude(t, center=true)
@@ -57,7 +56,6 @@ module btm_grip_support() {
 module top_grip_support() {
   t = board_thickness;
   l=bottle_grip_top_diam/2;
-  margin=6;
 
   points = [
     [bottle_axle_diam/2, 0.5],
@@ -67,8 +65,8 @@ module top_grip_support() {
     [20, 0.5],
     [30, 0.5],
     [l, 0.5],
-    [l, t + margin + bottle_grip_top_height],
-    [16/2, t + margin],
+    [l, t + grip_margin + bottle_grip_top_height],
+    [16/2, t + grip_margin],
   ];
 
   linear_extrude(t, center=true)

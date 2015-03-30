@@ -34,4 +34,14 @@ module z_bar() {
   bar(s=z_rods_span, width=z_bar_width, hole_d=z_rods_diam, t=board_thickness, m_hole_d=toolbit_mount_diam, s_m=z_rods_span/2);
 }
 
-bearing_guide();
+module z_stepper_bar() {
+  rotate([90,-90,180])
+  linear_extrude(board_thickness, center=true) {
+    difference() {
+      projection() rotate([90,0,90]) bar(s=z_rods_span, width=28.2, hole_d=z_rods_diam, t=board_thickness, m_hole_d=toolbit_mount_diam, s_m=z_rods_span/2);
+      translate([z_rods_span/2,0]) stepper_motor_mount(11);
+    }
+  }
+}
+
+z_stepper_bar();

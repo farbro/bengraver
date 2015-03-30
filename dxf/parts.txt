@@ -7,7 +7,9 @@ wall_lo
 mount_plate
 bearing_guide
 bottle_bar
-x_carriage
+x_carriage0
+x_carriage1
+x_carriage2
 z_bar
 beltguide
 pulley
@@ -20,3 +22,8 @@ top_plate2
 belt_tensioner
 belt_clamp
 electronics_mount
+nut_plate0
+nut_plate1
+spring_plate
+z_stepper_bar
+

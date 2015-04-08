@@ -3,16 +3,29 @@ use <../MCAD/servos.scad>;
 use <../MCAD/motors.scad>;
 use <formulas.scad>;
 use <common.scad>;
+use <x_table2.scad>;
+use <vslot.scad>;
 
 module belt_guide(inner=true) {
     translate([(x_top_rod_position[0] + x_btm_rod_position[0])/2, (x_top_rod_position[1] + x_btm_rod_position[1])/2]) rotate([0, 0, -x_table_tilt+90])
-  translate([-bearing_extrusion_height/2 + plate_distance - board_thickness/2, 0]) {
+  translate([-2,0]) rotate([0,0,90]){
     square([bearing_extrusion_height, bearing_extrusion_length], center=true);
-    if (inner)
-      square([bearing_axle_length, bearing_id], center=true);
-    else
-      square([bearing_axle_length, arc_distance(bearing_id/2, bearing_id/2 - board_thickness/2)], center=true);
+    if (inner) square([bearing_axle_length, bearing_id], center=true);
   }
+}
+
+module x_stepper_hole(holes=false) {
+    translate([(x_top_rod_position[0] + x_btm_rod_position[0])/2, (x_top_rod_position[1] + x_btm_rod_position[1])/2]) rotate([0, 0, -x_table_tilt+90])
+  translate([-2 + (22-x_stepper_pulley_radius*2)/2 ,-35]){
+    if (!holes) square([42, 33], center=true);
+    translate([x_stepper_mount_screw_span/2,0]) circle(5/2);
+    translate([-x_stepper_mount_screw_span/2,0]) circle(5/2);
+  }
+}
+
+module bearing_axle() {
+  linear_extrude(board_thickness, center=true)
+  square([5.8, bearing_axle_length], center=true);
 }
 
 module belt_tensioner_hole(inner=false) {
@@ -33,14 +46,9 @@ module belt_tensioner() {
   }
 }
 
-module x_rods_holes() {
-    translate(x_top_rod_position) { circle(table_rods_diam/2); }
-    translate(x_btm_rod_position) { circle(table_rods_diam/2); }
-}
-
 module endstop_hole() {
   translate([(x_top_rod_position[0] + x_btm_rod_position[0])/2, (x_top_rod_position[1] + x_btm_rod_position[1])/2]) rotate([0, 0, -x_table_tilt+90])
-  translate([plate_distance, - carriage_height/2])  
+  translate([plate_distance, - carriage_height/2 + 7])  
   rotate([180, 0, 180]) {
       endstop();
   }
@@ -56,14 +64,14 @@ module cable_channel(points) {
   }
 }
 
-module x_stepper_strap_holes() {
-  translate([(x_top_rod_position[0] + x_btm_rod_position[0])/2, (x_top_rod_position[1] + x_btm_rod_position[1])/2]) rotate([0, 0, -x_table_tilt+90])
-  translate([-table_rods_diam/2 - board_thickness/2, 0]) { 
-    translate([board_thickness/2 + strap_hole_dim[1]/2, x_rods_span/2 - table_rods_diam/2 - strap_hole_dim[0] - strap_margin]) rotate([0, 0, 90]) square(strap_hole_dim, center=true);
-    translate([-(board_thickness/2 + strap_hole_dim[1]/2), x_rods_span/2 - table_rods_diam/2 - strap_hole_dim[0] - strap_margin]) rotate([0, 0, 90]) square(strap_hole_dim, center=true);
-
-    translate([board_thickness/2 + strap_hole_dim[1]/2, -(x_rods_span/2 - table_rods_diam/2 - strap_hole_dim[0] - strap_margin)]) rotate([0, 0, 90]) square(strap_hole_dim, center=true);
-    translate([-(board_thickness/2 + strap_hole_dim[1]/2),-(x_rods_span/2 - table_rods_diam/2 - strap_hole_dim[0] - strap_margin)]) rotate([0, 0, 90]) square(strap_hole_dim, center=true);
+module x_table_holes(holes=false) {
+  // x table
+   translate(bottle_axle_pos) rotate([0,0,-x_table_tilt]) translate([-x_a_distance, 0])  translate([0,-carriage_base_dist-z_plate_dist-board_thickness/2]) {
+      translate([-10,0]) circle(5/2);
+      translate([10,0]) circle(5/2);
+     
+    if (!holes) hull() projection() vslot20x40(1); 
+   
   }
 }
 
@@ -119,16 +127,14 @@ module wall_rm() {
     union() {
       translate(bottle_axle_pos) circle(r=bearing_hole_diam/2, center=true);
       translate(a_stepper_pos) rotate([0, 0, stepper_rotation]) nema17_holes(stepper_slide_distance);
-      belt_guide(inner=true);
-      x_rods_holes();
+      x_table_holes(holes=true);
+      belt_guide(inner=false);
       a_stepper_holes(outline=false);
       endstop_hole(inner=true, show=false);
       projection(cut=false) endstop_hole();
       translate(belt_tensioner_position) belt_tensioner_hole(inner=true);
 
-      cable_channel(points=[[front_rod_diam*2, 0], [a_stepper_pos[0] - 23, a_stepper_pos[1]], [75, 45]]);
-      cable_channel(points=[[75, 40], x_top_rod_position]);
-      cable_channel(points=[[front_rod_diam*2, 0], x_btm_rod_position]);
+      cable_channel(points=[[front_rod_diam*2, 0], [a_stepper_pos[0] - 23, a_stepper_pos[1]], [a_stepper_pos[0] -23, 30], [45, 40]]);
     }
   }
 }
@@ -141,8 +147,7 @@ module wall_ri() {
     union() {
       translate(bottle_axle_pos) circle(r=bearing_guide_diam/2, center=true);
       a_stepper_holes(outline=false);
-      x_rods_holes();
-      belt_guide(inner=false);
+      x_table_holes();
       projection(cut=true) endstop_hole();
       translate(belt_tensioner_position) belt_tensioner_hole(inner=false);
       translate([front_rod_diam*2,cable_diam/2]) circle(5/2);
@@ -157,9 +162,11 @@ module wall_ro() {
     wall();
     union() {
       translate(bottle_axle_pos) circle(r=bearing_guide_diam/2, center=true);
-      belt_guide(inner=false);
+      belt_guide(inner=true);
       a_stepper_holes(outline=true);
       translate(belt_tensioner_position) belt_tensioner_hole(inner=false);
+      x_table_holes(holes=true);
+      translate([a_stepper_pos[0] - 25, a_stepper_pos[1]]) circle(5/2);
     }
   }
 }
@@ -170,8 +177,9 @@ module wall_li() {
   difference() {
     wall();
     union() {
-      x_rods_holes();
-      x_stepper_strap_holes();
+      x_table_holes();
+      belt_guide(inner=true);
+      x_stepper_hole(holes=true);
     }
   }
 }
@@ -181,7 +189,9 @@ module wall_lo() {
   linear_extrude(board_thickness, center=true)
   difference() {
     wall();
-    x_stepper_strap_holes();
+    x_table_holes(holes=true);
+    belt_guide(inner=false);
+    x_stepper_hole();
   }
 }
 
@@ -191,10 +201,11 @@ module wall_lm() {
   difference() {
     wall();
     union() {
-      x_rods_holes();
-      x_stepper_strap_holes();
+      belt_guide(inner=false);
+      x_table_holes(holes=true);
+      x_stepper_hole(holes=true);
     }
   }
 }
 
-wall_l();
+wall_lm();

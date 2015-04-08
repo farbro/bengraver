@@ -9,6 +9,8 @@ use <electronics_mount.scad>;
 $fa=0.1;
 $fs=0.1;
 
+x_stepper_bar=true;
+
 scale([export_scale, export_scale, export_scale])
 offset(delta=cut_diam/2)
   projection(cut=true) {
@@ -39,5 +41,10 @@ offset(delta=cut_diam/2)
     if (nut_plate0)        nut_plate(nut=true);
     if (nut_plate1)        nut_plate(nut=false);
     if (spring_plate)      spring_plate();
-    if (z_stepper_bar)     rotate([90,0,90]) z_stepper_bar();
+    if (z_stepper_bar_outer) z_stepper_bar_outer();
+    if (z_stepper_bar_inner) z_stepper_bar_inner();
+    if (z_bar_inner)       z_bar_inner();
+    if (z_bar_outer)       z_bar_outer();
+    if (bearing_axle)      bearing_axle();
+    if (x_stepper_bar)      x_stepper_bar();
   }

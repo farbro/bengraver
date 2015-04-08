@@ -25,5 +25,9 @@ electronics_mount
 nut_plate0
 nut_plate1
 spring_plate
-z_stepper_bar
+z_stepper_bar_outer
+z_stepper_bar_inner
+z_bar_inner
+z_bar_outer
+bearing_axle
 

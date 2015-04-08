@@ -65,25 +65,24 @@ module x_carriage() {
       if (level==1 || level==2) square([nut_guide_hole_width, nut_guide_hole_length], center=true);
 
       // Screw holes
-      translate([carriage_screw_span_x/2, carriage_screw_span/2]) circle(carriage_screw_diam/2);
-      translate([-carriage_screw_span_x/2, carriage_screw_span/2]) circle(carriage_screw_diam/2);
-      translate([carriage_screw_span_x/2, -carriage_screw_span/2]) circle(carriage_screw_diam/2);
-      translate([-carriage_screw_span_x/2, -carriage_screw_span/2]) circle(carriage_screw_diam/2);
+      translate([carriage_length/2, carriage_screw_span/2]) circle(carriage_screw_diam/2);
+      translate([-carriage_length/2, carriage_screw_span/2]) circle(carriage_screw_diam/2);
+      translate([carriage_length/2, -carriage_screw_span/2]) circle(carriage_screw_diam/2);
+      translate([-carriage_length/2, -carriage_screw_span/2]) circle(carriage_screw_diam/2);
       if (level==0 || level==1) {
-        //translate([0, carriage_screw_span/2]) circle(carriage_screw_diam/2);
-        //translate([0, -carriage_screw_span/2]) circle(carriage_screw_diam/2);
+        translate([0, carriage_screw_span/2]) circle(carriage_screw_diam/2*100);
+        translate([0, -carriage_screw_span/2]) circle(carriage_screw_diam/2);
       }
-      if (level==1) {
-        translate([carriage_length/2,0]) square([2, beltWidth], center=true);
-        translate([-carriage_length/2,0]) square([2, beltWidth], center=true);
-      }
+
+      // Belt holes
+      square([100,100], center=true);
+
     }
   }
 }
 
 module x_table() {
   translate([0,0,-carriage_base_dist-z_plate_dist-board_thickness/2]) {
-  translate([x_carriage_pos, 0]) {
   translate([0,0,-carriage_base_dist]) {
     x_carriage(level=0);
   }
@@ -101,16 +100,13 @@ module x_table() {
       translate([0,nut_guide_hole_length/2 - board_thickness]) rotate([90,0]) nut_plate(nut=false);
       translate([0,-(nut_guide_hole_length/2 - board_thickness/2)]) rotate([90,0]) spring_plate(nut=false);
 
-      translate([0, -z_rods_length/2 + board_thickness/2 + z_pos, 0]) rotate([-90,0,0]) z_stepper_bar_inner();
-      translate([0, -z_rods_length/2 + board_thickness/2 + z_pos - board_thickness, 0]) rotate([-90,0,0]) z_stepper_bar_outer();
-      translate([0, z_rods_length/2 - board_thickness/2 + z_pos, 0]) rotate([90,0,0]) z_bar_outer();
-      translate([0, z_rods_length/2 - board_thickness/2 + z_pos - board_thickness, 0]) rotate([90,0,0]) z_bar_inner();
+      translate([-z_rods_span/2, -z_rods_length/2 + board_thickness/2 + z_pos, 0]) rotate([0,90,0]) z_stepper_bar();
+      translate([-z_rods_span/2, z_rods_length/2 - board_thickness/2 + z_pos, 0]) rotate([0,90,0]) z_bar();
     }
   }
 
   translate([0,0,carriage_base_dist + z_plate_dist*2 + board_thickness]) {
     x_carriage(level=2);
-  }
   }
     
  translate([-x_table_width/2,0]) rotate([90,0,90]) vslot20x40(x_table_width);

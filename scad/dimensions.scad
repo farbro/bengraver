@@ -13,7 +13,7 @@ span_bottle=100;
 bottle_rod_diam=10; 
 front_rod_diam=10; 
 width=470;
-span_bottom=160; // Bottom rods span
+span_bottom=145; // Bottom rods span
 span_bottle=120; // Bottle rods span
 board_thickness=5.65;
 nut_t=6;
@@ -51,8 +51,8 @@ axle_position=[0,0];
 break_position=[70, 50];
 axis_z=40;
 bearing_extrusion_height=7.2;
-bearing_extrusion_length=24;
-bearing_axle_length=20;
+bearing_extrusion_length=25;
+bearing_axle_length=13;
 bearing_id=8;
 
 //x_top_rod_position=[0,bottle_axle_pos[1] + x_rods_span/2];
@@ -69,8 +69,8 @@ stepper_rotation=0; //atan((bottle_axle_pos[1]-a_stepper_pos[1])/(bottle_axle_po
 // Left wall
 
 // X table
-x_carriage_pos=width/5;
-x_a_distance=85;
+x_carriage_pos=width/2 - 70;
+x_a_distance=110;
 x_table_tilt=0;
 x_rods_span=50;
 rod_ext=8;
@@ -81,23 +81,24 @@ table_rods_diam=8;
 x_stepper_mount_length = 50;
 x_stepper_mount_width = x_rods_span + 10;
 x_stepper_mount_shift=(22-9)/2;
+x_stepper_mount_screw_span=50;
 
 x_table_width=width - board_thickness*2;
 
 // X carriage
 //carriage_length= 24; // single bushing
-carriage_length=65; // double bushings
-carriage_height=x_rods_span+20;
+carriage_length=77; // double bushings
+carriage_height=x_rods_span+15;
 carriage_rounding_radius = 5;
 carriage_bushing_hole_width = 10;
-z_rods_length=120;
+z_rods_length=125;
 z_rods_diam=8;
-z_bar_width=20;
-z_pos=40;
+z_bar_width=28;
+z_pos=-10 + 0;
 z_bushings_diam=15;
 z_bolt_diam=3;
-z_rods_span=41;
-z_bushings_pos = x_rods_span/2;
+z_rods_span=45;
+z_bushings_pos = 20;
 solenoid_dim = [27, 22, 25];
 solenoid_pos=0;
 plate_distance = sqrt(pow(bushings_diam/2, 2) - pow(carriage_bushing_hole_width/2, 2)) + board_thickness/2; // Calculates plate distance (depending on carriage_bushing_hole_width
@@ -105,22 +106,28 @@ echo("Plate distance:", plate_distance*2 + board_thickness);
 z_plate_dist = 5;
 z_bushings_hole_width = 2*sqrt(pow(bushings_diam/2, 2) - pow(z_plate_dist, 2));
 nut_guide_hole_width=10;
-nut_guide_hole_length=30;
+nut_guide_hole_length=40;
 nut_guide_height=z_plate_dist*2;
-nut_guide_width=20;
+nut_guide_width=14;
 z_leadscrew_diam=5;
-carriage_screw_diam=8;
+z_screws_diam=5;
+z_screws_span=19;
+
+carriage_screw_diam=5;
+carriage_screw_span=59.7;
+carriage_screw_span_x=carriage_length - 3;
+carriage_base_dist=10+board_thickness/2+2;
 
 // Calculations for x table position
 xz_span = plate_distance + z_plate_dist + board_thickness/2;
 x_top_rod_position=[bottle_axle_pos[0] - cos(x_table_tilt)*(x_a_distance) + sin(x_table_tilt)*(-xz_span), bottle_axle_pos[1] + sin(x_table_tilt)*(x_a_distance) + cos(x_table_tilt)*(-xz_span)];
-x_btm_rod_position=[bottle_axle_pos[0] - cos(x_table_tilt)*(x_a_distance + x_rods_span) + sin(x_table_tilt)*(-xz_span), bottle_axle_pos[1] + sin(x_table_tilt)*(x_a_distance + x_rods_span) + cos(x_table_tilt)*(-xz_span)];
+x_btm_rod_position=x_top_rod_position;
 
 toolbit_mount_diam=4.8;
 
 // Bottle
 bottle_pos=40;
-bottle_diam=100;
+bottle_diam=45;
 bottle_height=360;
 
 // Bottle bar

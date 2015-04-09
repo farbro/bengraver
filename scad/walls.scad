@@ -149,6 +149,7 @@ module wall_ri() {
       a_stepper_holes(outline=false);
       x_table_holes();
       projection(cut=true) endstop_hole();
+      belt_guide(inner=false);
       translate(belt_tensioner_position) belt_tensioner_hole(inner=false);
       translate([front_rod_diam*2,cable_diam/2]) circle(5/2);
     }

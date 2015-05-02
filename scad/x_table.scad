@@ -13,10 +13,10 @@ module nut_plate(nut=true) {
   linear_extrude(board_thickness, center=true) {
     difference() {
       union() {
-        square([nut_guide_hole_width-0.5, nut_guide_height + board_thickness*2 - 0.5], center=true);
+        square([nut_guide_hole_width, nut_guide_height + board_thickness*2 - 0.5], center=true);
         square([nut_guide_width, nut_guide_height - 0.5], center=true);
       }
-      if (nut) circle(8.8/2, $fn=6);
+      if (nut) circle(9.1/2, $fn=6);
       else circle(z_leadscrew_diam/2);
     }
   }
@@ -26,7 +26,7 @@ module spring_plate() {
   linear_extrude(board_thickness, center=true) {
     difference() {
       union() {
-        square([nut_guide_hole_width, nut_guide_height + board_thickness*2 - 0.5], center=true);
+        square([nut_guide_hole_width+0.2, nut_guide_height + board_thickness*2 - 0.5], center=true);
         square([nut_guide_width, nut_guide_height - 0.5], center=true);
       }
       circle(z_leadscrew_diam/2);
@@ -62,20 +62,33 @@ module x_carriage() {
       mirror([1, 0, 0]) bearing_holes();
 
       // Nut guide hole
-      if (level==1 || level==2) square([nut_guide_hole_width, nut_guide_hole_length], center=true);
+      if (level==1 || level==2) {
+        square([nut_guide_hole_width, nut_guide_hole_length], center=true);
+        translate([0, -carriage_height/2 - carriage_rounding_radius]) square([10.5, 10*2], center=true);
+      }
 
       // Screw holes
       translate([carriage_screw_span_x/2, carriage_screw_span/2]) circle(carriage_screw_diam/2);
       translate([-carriage_screw_span_x/2, carriage_screw_span/2]) circle(carriage_screw_diam/2);
       translate([carriage_screw_span_x/2, -carriage_screw_span/2]) circle(carriage_screw_diam/2);
       translate([-carriage_screw_span_x/2, -carriage_screw_span/2]) circle(carriage_screw_diam/2);
+
+      
       if (level==0 || level==1) {
         //translate([0, carriage_screw_span/2]) circle(carriage_screw_diam/2);
         //translate([0, -carriage_screw_span/2]) circle(carriage_screw_diam/2);
       }
       if (level==1) {
-        translate([carriage_length/2,0]) square([2, beltWidth], center=true);
-        translate([-carriage_length/2,0]) square([2, beltWidth], center=true);
+        translate([carriage_length/2,0]) square([7, beltWidth + 0.5], center=true);
+        translate([-carriage_length/2,0]) square([7, beltWidth + 0.5], center=true);
+      }
+
+      if (level==2) {
+        translate([carriage_length/2-3,0]) square([2, beltWidth + 0.5], center=true);
+        translate([carriage_length/2,0]) circle(2.9/2);
+
+        translate([-carriage_length/2+3,0]) square([2, beltWidth + 0.5], center=true);
+        translate([-carriage_length/2,0]) circle(2.9/2);
       }
     }
   }
@@ -86,6 +99,10 @@ module x_table() {
   translate([x_carriage_pos, 0]) {
   translate([0,0,-carriage_base_dist]) {
     x_carriage(level=0);
+    translate([carriage_screw_span_x/2, carriage_screw_span/2, -board_thickness/2-4]) rotate([90, 0, 0]) rod_threaded(d=5, l=carriage_base_dist*2 + z_plate_dist*2 + board_thickness*3 + 4);
+    translate([-carriage_screw_span_x/2, carriage_screw_span/2, -board_thickness/2-4]) rotate([90, 0, 0]) rod_threaded(d=5, l=carriage_base_dist*2 + z_plate_dist*2 + board_thickness*3 + 4);
+    translate([carriage_screw_span_x/2, -carriage_screw_span/2, -board_thickness/2-4]) rotate([90, 0, 0]) rod_threaded(d=5, l=carriage_base_dist*2 + z_plate_dist*2 + board_thickness*3 + 4);
+    translate([-carriage_screw_span_x/2, -carriage_screw_span/2, -board_thickness/2-4]) rotate([90, 0, 0]) rod_threaded(d=5, l=carriage_base_dist*2 + z_plate_dist*2 + board_thickness*3 + 4);
   }
 
   translate([0,0,carriage_base_dist]) {
@@ -96,6 +113,10 @@ module x_table() {
       translate([-z_rods_span/2, z_bushings_pos]) rotate([90,0,0]) import("LM8UU-24_Rev3_-_8.stl"); 
       translate([z_rods_span/2, -z_bushings_pos]) rotate([90,0,0]) import("LM8UU-24_Rev3_-_8.stl"); 
       translate([-z_rods_span/2, -z_bushings_pos]) rotate([90,0,0]) import("LM8UU-24_Rev3_-_8.stl"); 
+
+      translate([z_rods_span/2, -z_rods_length/2 + z_pos]) rod_smooth(d=8, l=z_rods_length);
+      translate([-z_rods_span/2, -z_rods_length/2 + z_pos]) rod_smooth(d=8, l=z_rods_length);
+      translate([0, -z_rods_length/2 + z_pos]) rod_smooth(d=5, l=z_rods_length*0.7);
 
       translate([0,nut_guide_hole_length/2 - board_thickness/2]) rotate([90,0]) nut_plate(nut=true);
       translate([0,nut_guide_hole_length/2 - board_thickness]) rotate([90,0]) nut_plate(nut=false);

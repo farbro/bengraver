@@ -38,12 +38,8 @@ module btm_grip_support() {
     [bottle_axle_diam/2, 0.5],
     [15, 0.5],
     [15, t],
-    [20, t],
-    [20, 0.5],
-    [30, 0.5],
-    [30, t],
-    [35, t],
-    [35, 0.5],
+    [25, t],
+    [25, 0.5],
     [l, 0.5],
     [l, t + grip_margin],
     [16/2, t + grip_margin + bottle_grip_bottom_height],
@@ -167,10 +163,10 @@ module top_grip() {
 }
 
 //bottom_grip();
-//btm_grip_support();
+btm_grip_support();
 //btm_plate();
 //bottom_grip();
 //top_grip_support();
 //top_plate();
-top_grip();
+//top_grip();
 

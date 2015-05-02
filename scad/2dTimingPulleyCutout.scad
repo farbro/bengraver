@@ -109,10 +109,6 @@ module pulleyOutline(r, shaftRadius, pulleyRadius, screwWidth)
 		union()
 		{
 			circle(r=shaftRadius, center=true); //shaft
-				translate([0,(pulleyRadius+shaftRadius)/2,0])
-				circle(screwWidth,true);
-				translate([0,-(pulleyRadius+shaftRadius)/2,0])
-				circle(screwWidth,true);
 		}
 	}
 }

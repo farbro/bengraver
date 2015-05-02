@@ -30,4 +30,6 @@ z_stepper_bar_inner
 z_bar_inner
 z_bar_outer
 bearing_axle
-
+belt_guide_axle_holder
+roller0
+roller1

@@ -55,7 +55,7 @@ module z_bar_outer() {
 }
 
 module bearing_guide() {
-  bar(s=bottle_bar_height, width=z_bar_width, hole_d=bottle_rod_diam, t=board_thickness, m_hole_d=bearing_guide_diam, s_m=span_bottle/2);
+  bar(s=bottle_bar_height, width=bottle_bar_width, hole_d=bottle_rod_diam, t=board_thickness, m_hole_d=bearing_guide_diam, s_m=span_bottle/2);
 }
 
 module bottle_bar() {
@@ -75,7 +75,7 @@ module z_stepper_bar_inner() {
   linear_extrude(board_thickness, center=true) {
   difference() {
     bar2(s=z_rods_span, width=28.2, hole_d=z_rods_diam, t=board_thickness, m_hole_d=toolbit_mount_diam+1, s_m=z_rods_span/2);
-     translate([0,0]) stepper_motor_mount(nema_standard=11, pilot=false, mochup=false);
+      offset(0.2) stepper_motor_mount(nema_standard=11, pilot=false, mochup=false);
       translate([z_screws_span/2, 0]) circle(z_screws_diam/2);
       translate([-z_screws_span/2, 0]) circle(z_screws_diam/2);
     }
@@ -86,9 +86,9 @@ module z_stepper_bar_outer() {
   linear_extrude(board_thickness, center=true) {
   difference() {
     bar2(s=z_rods_span, width=28.2, hole_d=0, t=board_thickness, m_hole_d=toolbit_mount_diam, s_m=z_rods_span/2);
-      translate([0,0]) stepper_motor_mount(nema_standard=11, pilot=true);
-    translate([z_screws_span/2, 0]) circle(8.8/2, $fn=6);
-    translate([-z_screws_span/2, 0]) circle(8.8/2, $fn=6);
+    offset(0.2) stepper_motor_mount(nema_standard=11, pilot=true);
+    translate([z_screws_span/2, 0]) circle(9.1/2, $fn=6);
+    translate([-z_screws_span/2, 0]) circle(9.1/2, $fn=6);
     }
   }
 }

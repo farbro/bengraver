@@ -10,12 +10,19 @@ use <bottle_grip.scad>;
 use <electronics_mount.scad>;
 use <timingPulley-v2.scad>;
 use <../MCAD/bearing.scad>;
+use <nutroller.scad>;
 
 x_table_bar_dist = 3;
 
 // Sides
 rotate([90,0,0]) {
   wall_ro();
+
+  // Bearing guide
+translate([(x_top_rod_position[0] + x_btm_rod_position[0])/2, (x_top_rod_position[1] + x_btm_rod_position[1])/2]) rotate([0, 0, -x_table_tilt+90])
+translate([-2,0]) rotate([90,0,0]){
+  translate([0,0,-7/2]) bearing();
+}
   translate(belt_tensioner_position) belt_tensioner();
   translate([0, 0, -board_thickness]) {
     wall_rm();
@@ -49,13 +56,6 @@ translate([0,-board_thickness/2-rod_ext, 0]) rod_threaded(d=front_rod_diam, l=wi
 // x table
 translate([bottle_axle_pos[0], width/2, bottle_axle_pos[1]]) rotate([0, x_table_tilt]) translate([-x_a_distance, 0, 0]) rotate([0,0,-90]) x_table();
 
-//translate([x_btm_rod_position[0], board_thickness, x_btm_rod_position[1]]) rotate([0, 90 + x_table_tilt, 0])  {
-//  x_table();
-//  translate([- plate_distance + board_thickness/2, board_thickness/2,  x_rods_span/2]) rotate([0, 90, 0]) {
-//    bearing();
-//    rotate([90, 0, 0]) translate([0, -(bearing_axle_length-bearing_extrusion_height)/2, 0]) rod_smooth(d=8, l=bearing_axle_length);
-//  }
-//}
 
 // Bottle grip
  translate([bottle_axle_pos[0], board_thickness*2.5 + 2.3, bottle_axle_pos[1]]) rotate([-90, 0, 0]) bottom_grip();
@@ -71,12 +71,13 @@ translate([span_bottom, 0, 0])
   rotate([0, -back_tilt_angle, 0])
 union() {
   translate([0,bottle_pos,span_bottle/2]) rotate(90, [1,0,0]) translate([0, 0, 0]) mirror([0, 0, 1]) bottle();
+
   // Bottle bar
   translate([0, bottle_bar_pos, 0]) bearing_guide();
-
-  // Bearing guide
   translate([0, bottle_bar_pos+board_thickness, 0]) bottle_bar();
   translate([0, bottle_bar_pos+board_thickness*2, 0]) bearing_guide();
+  translate([0, bottle_bar_pos+board_thickness*2.5, 0]) rotate([-90, 0, 0]) nutroller();
+  translate([0, bottle_bar_pos+board_thickness*2.5, span_bottle]) rotate([-90, 0, 0]) nutroller();
 
   // Rods
   translate([0,-board_thickness/2 - nut_t,0]) rod_threaded(d=bottle_rod_diam, l=width+board_thickness+nut_t*2);

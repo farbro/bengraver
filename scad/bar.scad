@@ -37,6 +37,7 @@ module bar2(s=100, width=45, hole_d=8, t=6, m_hole_d=8, s_m=50) {
 }
 
 module z_bar_inner() {
+  color("white")
   linear_extrude(board_thickness, center=true)
   difference() {
     bar2(s=z_rods_span, width=z_bar_width, hole_d=z_rods_diam, t=board_thickness, m_hole_d=toolbit_mount_diam, s_m=z_rods_span/2);
@@ -46,6 +47,7 @@ module z_bar_inner() {
 }
 
 module z_bar_outer() {
+  color("white")
   linear_extrude(board_thickness, center=true)
   difference() {
     bar2(s=z_rods_span, width=z_bar_width, hole_d=0, t=board_thickness, m_hole_d=toolbit_mount_diam, s_m=z_rods_span/2);
@@ -63,15 +65,18 @@ module bottle_bar() {
 }
 
 module z_bar() {
+color("white")
   bar(s=z_rods_span, width=z_bar_width, hole_d=z_rods_diam, t=board_thickness, m_hole_d=toolbit_mount_diam, s_m=z_rods_span/2);
 }
 
 module x_stepper_bar() {
+  color("white")
   linear_extrude(board_thickness)
   bar2(s=x_stepper_mount_screw_span, width=20, t=board_thickness, hole_d=5, m_hole_d=0);
 }
 
 module z_stepper_bar_inner() {
+  color("white")
   linear_extrude(board_thickness, center=true) {
   difference() {
     bar2(s=z_rods_span, width=28.2, hole_d=z_rods_diam, t=board_thickness, m_hole_d=toolbit_mount_diam+1, s_m=z_rods_span/2);
@@ -83,6 +88,7 @@ module z_stepper_bar_inner() {
 }
 
 module z_stepper_bar_outer() {
+  color("white")
   linear_extrude(board_thickness, center=true) {
   difference() {
     bar2(s=z_rods_span, width=28.2, hole_d=0, t=board_thickness, m_hole_d=toolbit_mount_diam, s_m=z_rods_span/2);

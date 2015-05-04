@@ -44,7 +44,7 @@ module btm_grip_support() {
     [l, t + grip_margin],
     [16/2, t + grip_margin + bottle_grip_bottom_height],
   ];
-
+  color("white")
   linear_extrude(t, center=true)
     polygon(points);
 }
@@ -65,12 +65,14 @@ module top_grip_support() {
     [16/2, t + grip_margin],
   ];
 
+  color("white")
   linear_extrude(t, center=true)
     polygon(points);
 }
 
 module top_plate() {
   t = board_thickness;
+  color("white")
   linear_extrude(board_thickness, center=true)
   difference() {
     circle(r=bottle_grip_top_diam/2);
@@ -109,6 +111,7 @@ module beltguide() {
 
 module btm_plate() {
   t = board_thickness;
+  color("white")
   linear_extrude(board_thickness, center=true)
   difference() {
     circle(r=bottle_grip_bottom_diam/2);
@@ -124,6 +127,7 @@ module btm_plate() {
 
 
 module btm_plate2() {
+  color("white")
   linear_extrude(board_thickness, center=true) 
   difference() {
     circle(r=bottle_grip_bottom_diam/2);
@@ -132,6 +136,7 @@ module btm_plate2() {
 }
 
 module top_plate2() {
+  color("white")
   linear_extrude(board_thickness, center=true) 
   difference() {
     circle(r=bottle_grip_top_diam/2);
